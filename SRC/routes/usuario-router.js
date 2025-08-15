@@ -1,17 +1,12 @@
-/* Rutas de usuarios (/usuarios)
-POST / → Crear usuario (registro)
+import { Router } from "express";
+import { getAll, getById, create, deleted, updataById } from "../controller/usuario-controller.js";
 
-GET / → Listar todos
-
-GET /:id → Ver usuario por ID
-
-PUT /:id → Editar usuario
-
-DELETE /:id → Eliminar usuario*/ 
+const router = Router ();
 
 
-router.get ('/usuario');
-router.get ('/usuario/:id');
-router.post('/usuario');
-router.put('/usuario/:id');
-router.delete ('/usuario/id');
+router.get ('/usuario', getAll);
+router.get ('/usuario/:id', getById);
+router.post('/usuario', create);
+router.post('/usuario', create);//login arreglar y crear
+router.put('/usuario/:id', updataById);
+router.delete ('/usuario/:id', deleted);

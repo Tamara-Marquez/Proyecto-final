@@ -45,7 +45,7 @@ const updataUserById = async (id, user) => {
         const query = "UPDATA Usuario SET nombre = ?, apellido =?, email=?, password=?, id_rol=? WHERE id_usuario=?"; 
         const [result] = await pool.query (query [ nombre, apellido, email, password, id_rol, id]);
         return result.affectedRows > 0
-    } catch (error) catch (error) {
+    } catch (error) {
     console.error(`Error updating user with id ${id}:`, error);
     throw new Error(`Could not update user with id ${id} in the database.`);
   }
