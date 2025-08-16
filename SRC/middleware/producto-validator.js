@@ -1,7 +1,5 @@
-// middlewares/validateProduct.js
 import { check, param, validationResult } from "express-validator";
 
-// Middleware interno para chequear errores
 const validateResult = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
