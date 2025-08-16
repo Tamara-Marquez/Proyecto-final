@@ -34,12 +34,12 @@ const getUsersById = async (id) => {
 const createUser = async (user) => {
     try {
         const { nombre, apellido, email, password, id_rol} = user; 
-        const query = " INSERT INTO Usuario (nombre, apellido, email, password, id_rol) VALUES (?, ?, ?, ?, ?)";
+        const query = " INSERT INTO usuario (nombre, apellido, email, password, id_rol) VALUES (?, ?, ?, ?, ?)";
         const [result] = await pool.query (query, [nombre, apellido, email, password, id_rol]);
         return {id: result.insertId, ...user};
     } catch (error) {
         console.error("Error al crear un usuario", error);
-        throw new Error("No se puedo encontrar el usuario en la base de datos.");
+        throw new Error("No se puedo crear el nuevo usuario");
     }
 };
 
@@ -58,17 +58,17 @@ const findUserByEmail= async (email) => {
 
 
 
-// obtener un usuario por id 
+// actualizar un usuario por id 
 
 const updataUserById = async (id, user) => {
     try {
         const {nombre, apellido, email, password, id_rol} = user; 
-        const query = "UPDATA Usuario SET nombre = ?, apellido =?, email=?, password=?, id_rol=? WHERE id_usuario=?"; 
+        const query = "UPDATA usuario SET nombre = ?, apellido =?, email=?, password=?, id_rol=? WHERE id_usuario=?"; 
         const [result] = await pool.query (query [ nombre, apellido, email, password, id_rol, id]);
         return result.affectedRows > 0
     } catch (error) {
-    console.error(`Error updating user with id ${id}:`, error);
-    throw new Error(`Could not update user with id ${id} in the database.`);
+    console.error(`Error al encontrar al usuario con el ID ${id}:`, error);
+    throw new Error(`No se encontro el usuario ${id} en la base de datos.`);
   }
 };
 
@@ -76,12 +76,12 @@ const updataUserById = async (id, user) => {
 
 const deleteUserById = async (id) => {
     try {
-        const query = "DELETE FROM Usuario WHERE id_usuario = ? ";
+        const query = "DELETE FROM usuario WHERE id_usuario = ? ";
         const [result] = await pool.query (query, [id]); 
         return result.affectedRows > 0;
     } catch (error) {
-         console.error(`Error deleting user with id ${id}:`, error);
-    throw new Error(`Could not delete user with id ${id} from the database.`);
+         console.error(`Erro al encontrar al usuario del ID  ${id}:`, error);
+    throw new Error(`No se encontro el usuario ${id} en la base de datos`);
     }
 }; 
 

@@ -5,29 +5,29 @@ use Tienda;
 -- Creamos  las tablas para la tienda --
 
  
-create table Rol (
-  id_rol INT  PRIMARY KEY,
-  nombre_rol ENUM('administrador','usuario') NOT NULL
+create table rol (
+  id_rol INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_rol VARCHAR (40) NOT NULL
 );
 
-create table Usuarios (
+create table usuario (
 id_usuario INT AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(20) NOT NULL,
 apellido VARCHAR(20) NOT NULL,
 email VARCHAR (40) NOT NULL,
 password  VARCHAR (200) NOT NULL,
-id_rol INT,
+id_rol INT auto_increment,
 FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
   ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
-create table Categorias (
+create table categorias (
 id_categoria SMALLINT AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
-create table Productos (
+create table productos (
 id_producto INT AUTO_INCREMENT PRIMARY KEY,
 marca VARCHAR(50) NOT NULL,
 modelo VARCHAR(50) NOT NULL,
@@ -59,7 +59,7 @@ FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 
 INSERT INTO Rol (id_rol, nombre_rol) VALUES
 (1, 'Administrador'),
-(2, 'Usuario');
+(2, 'Cliente');
 
 -- USUARIOS--
 
