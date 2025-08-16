@@ -1,4 +1,4 @@
-// ventas.validator.js
+
 import { Router } from "express";
 import { checkSchema, validationResult } from "express-validator";
 
@@ -57,4 +57,5 @@ router.delete(
 );
 
 export default router;
+
 
