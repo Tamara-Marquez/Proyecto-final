@@ -10,13 +10,13 @@ create table rol (
   nombre_rol VARCHAR (40) NOT NULL
 );
 
-create table usuario (
+create table usuarios (
 id_usuario INT AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(20) NOT NULL,
 apellido VARCHAR(20) NOT NULL,
 email VARCHAR (40) NOT NULL,
 password  VARCHAR (200) NOT NULL,
-id_rol INT auto_increment,
+id_rol INT ,
 FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
   ON UPDATE CASCADE ON DELETE SET NULL
 );
