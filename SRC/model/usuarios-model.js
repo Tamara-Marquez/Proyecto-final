@@ -1,5 +1,7 @@
 import {pool} from "../config/bd.js"
 
+// obtener todos los ususarios y usuario por ID  
+
 const getUsers =  async () => {
     try {
         const query = "SELECT * FROM usuario";
@@ -26,6 +28,8 @@ const getUsersById = async (id) => {
 
     }
 };
+ 
+//crear y login de usuario 
 
 const createUser = async (user) => {
     try {
@@ -34,10 +38,27 @@ const createUser = async (user) => {
         const [result] = await pool.query (query, [nombre, apellido, email, password, id_rol]);
         return {id: result.insertId, ...user};
     } catch (error) {
-        console.error("Error creating user:", error);
-        throw new Error("Could not create user in the database.");
+        console.error("Error al crear un usuario", error);
+        throw new Error("No se puedo encontrar el usuario en la base de datos.");
     }
 };
+
+const findUserByEmail= async (email) => {
+    try {
+        const query = "SELECT nombre, apellido, email, password FROM usuario WHERE email=?";
+        const [rows]= await pool.execute (query, [email]);
+        if (rows.length === 0) {
+        return null;
+    }
+    return  rows[0];
+    } catch (error) {
+        console.error("Error al encontrar el usuario con ese email", error);
+    }
+};
+
+
+
+// obtener un usuario por id 
 
 const updataUserById = async (id, user) => {
     try {
@@ -51,7 +72,9 @@ const updataUserById = async (id, user) => {
   }
 };
 
-const deleteUserbyId = async (id) => {
+// eliminar un usuario 
+
+const deleteUserById = async (id) => {
     try {
         const query = "DELETE FROM Usuario WHERE id_usuario = ? ";
         const [result] = await pool.query (query, [id]); 
@@ -63,4 +86,4 @@ const deleteUserbyId = async (id) => {
 }; 
 
 
-export { getUsers, getUsersById, createUser, updataUserById, deleteUserbyId};
+export { getUsers, getUsersById, createUser, updataUserById, deleteUserById, findUserByEmail};
