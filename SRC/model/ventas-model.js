@@ -1,48 +1,87 @@
-import {pool} from "../config/bd.js"
-// Crear venta
-export const createVentaModel = (ventaData, callback) => {
-    const { fecha, total, cliente_id } = ventaData;
-    const query = `
-        INSERT INTO ventas (fecha, total, cliente_id)
-        VALUES (?, ?, ?)
-    `;
-    connection.query(query, [fecha, total, cliente_id], callback);
-};
+// ventas.model.js  
 
-// Obtener todas las ventas
-export const getVentasModel = (callback) => {
-    const query = `
-        SELECT v.*, c.nombre AS cliente_nombre
-        FROM ventas v
-        JOIN clientes c ON v.cliente_id = c.id
-    `;
-    connection.query(query, callback);
-};
+ 
+const { v4: uuidv4 } = require('uuid');
 
-// Obtener venta por ID
-export const getVentaByIdModel = (id, callback) => {
-    const query = `
-        SELECT v.*, c.nombre AS cliente_nombre
-        FROM ventas v
-        JOIN clientes c ON v.cliente_id = c.id
-        WHERE v.id = ?
-    `;
-    connection.query(query, [id], callback);
-};
+// Simulación de la base de datos en memoria
 
-// Actualizar venta
-export const updateVentaModel = (id, ventaData, callback) => {
-    const { fecha, total, cliente_id } = ventaData;
-    const query = `
-        UPDATE ventas
-        SET fecha = ?, total = ?, cliente_id = ?
-        WHERE id = ?
-    `;
-    connection.query(query, [fecha, total, cliente_id, id], callback);
-};
+let ventasDB = [];
 
-// Eliminar venta
-export const deleteVentaModel = (id, callback) => {
-    const query = "DELETE FROM ventas WHERE id = ?";
-    connection.query(query, [id], callback);
-};
+/**
+ * Módulo del modelo para la gestión de ventas.
+ * Este módulo se encarga de las operaciones CRUD y de búsqueda de datos,
+ * actuando como la capa de acceso a la base de datos.
+ */
+class VentaModel {
+
+  /**
+   * Obtiene todas las ventas.
+   * @returns {Promise<Array>} Un array de objetos de venta.
+   */
+  static async findAll() {
+    return Promise.resolve(ventasDB);
+  }
+
+  /**
+   * Busca una venta por su ID.
+   * @param {string} id El ID de la venta.
+   * @returns {Promise<object|undefined>} La venta encontrada o undefined si no existe.
+   */
+  static async findById(id) {
+    const venta = ventasDB.find(v => v.id === id);
+    return Promise.resolve(venta);
+  }
+
+  /**
+   * Busca todas las ventas de un cliente específico.
+   * @param {string} clienteId El ID del cliente.
+   * @returns {Promise<Array>} Un array de ventas del cliente.
+   */
+  static async findByClienteId(clienteId) {
+    const ventasDelCliente = ventasDB.filter(v => v.clienteId === clienteId);
+    return Promise.resolve(ventasDelCliente);
+  }
+
+  /**
+   * Crea una nueva venta.
+   * @param {object} venta El objeto de la venta a crear.
+   * @returns {Promise<object>} La venta creada con un nuevo ID.
+   */
+  static async create(venta) {
+    const nuevaVenta = { ...venta, id: uuidv4() };
+    ventasDB.push(nuevaVenta);
+    return Promise.resolve(nuevaVenta);
+  }
+
+  /**
+   * Actualiza una venta existente.
+   * @param {string} id El ID de la venta a actualizar.
+   * @param {object} datosActualizados Los datos de la venta para actualizar.
+   * @returns {Promise<object|null>} La venta actualizada o null si no se encontró.
+   */
+  static async update(id, datosActualizados) {
+    const index = ventasDB.findIndex(v => v.id === id);
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
+    const ventaActualizada = { ...ventasDB[index], ...datosActualizados, id };
+    ventasDB[index] = ventaActualizada;
+    return Promise.resolve(ventaActualizada);
+  }
+
+  /**
+   * Elimina una venta por su ID.
+   * @param {string} id El ID de la venta a eliminar.
+   * @returns {Promise<boolean>} True si la venta fue eliminada, false en caso contrario.
+   */
+  static async delete(id) {
+    const index = ventasDB.findIndex(v => v.id === id);
+    if (index === -1) {
+      return Promise.resolve(false);
+    }
+    ventasDB.splice(index, 1);
+    return Promise.resolve(true);
+  }
+}
+
+module.exports = VentaModel;
