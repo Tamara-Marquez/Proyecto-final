@@ -1,68 +1,67 @@
 // ventas.controller.js
-// src/controllers/ventas.controller.js
+// ventas.controller.js
 
-const { v4: uuidv4 } = require('uuid');
 
-// Simulación de la base de datos
-let ventasDB = [];
 
-// Funciones de controlador
-const getVentas = (req, res) => {
-  res.status(200).json(ventasDB);
+const VentaModel = require('../models/ventas.model');
+
+// --- Funciones de controlador sin lógica de validación ---
+
+const getVentas = async (req, res) => {
+  const ventas = await VentaModel.findAll();
+  res.status(200).json(ventas);
 };
 
-const getVentaById = (req, res) => {
+const getVentaById = async (req, res) => {
   const { id } = req.params;
-  const venta = ventasDB.find(v => v.id === id);
+  const venta = await VentaModel.findById(id);
 
   if (!venta) {
     return res.status(404).json({ message: 'Venta no encontrada.' });
   }
-
   res.status(200).json(venta);
 };
 
-// Nueva función: Obtener ventas por cliente
-const getVentasPorCliente = (req, res) => {
+const getVentasPorCliente = async (req, res) => {
   const { clienteId } = req.params;
-  const ventasDelCliente = ventasDB.filter(v => v.clienteId === clienteId);
+  const ventasDelCliente = await VentaModel.findByClienteId(clienteId);
   res.status(200).json(ventasDelCliente);
 };
 
-// Nueva función: Obtener el total de ventas
-const getTotalDeVentas = (req, res) => {
-  const total = ventasDB.reduce((acumulador, venta) => acumulador + venta.total, 0);
-  res.status(200).json({ totalVentas: total });
+const getTotalDeVentas = async (req, res) => {
+    const ventas = await VentaModel.findAll();
+    const total = ventas.reduce((acumulador, venta) => acumulador + venta.total, 0);
+    res.status(200).json({ totalVentas: total });
 };
 
-// Nueva función: Obtener el producto más vendido
-const getProductoMasVendido = (req, res) => {
-  const conteoProductos = {};
-  ventasDB.forEach(venta => {
-    venta.productos.forEach(producto => {
-      const { productoId, cantidad } = producto;
-      conteoProductos[productoId] = (conteoProductos[productoId] || 0) + cantidad;
+const getProductoMasVendido = async (req, res) => {
+    const ventas = await VentaModel.findAll();
+    const conteoProductos = {};
+    ventas.forEach(venta => {
+        venta.productos.forEach(producto => {
+            const { productoId, cantidad } = producto;
+            conteoProductos[productoId] = (conteoProductos[productoId] || 0) + cantidad;
+        });
     });
-  });
 
-  const productosOrdenados = Object.keys(conteoProductos).sort((a, b) => conteoProductos[b] - conteoProductos[a]);
-  const productoMasVendido = productosOrdenados[0];
+    const productosOrdenados = Object.keys(conteoProductos).sort((a, b) => conteoProductos[b] - conteoProductos[a]);
+    const productoMasVendido = productosOrdenados[0];
 
-  res.status(200).json({
-    productoId: productoMasVendido,
-    cantidadVendida: conteoProductos[productoMasVendido]
-  });
+    res.status(200).json({
+        productoId: productoMasVendido,
+        cantidadVendida: conteoProductos[productoMasVendido]
+    });
 };
 
-// Nueva función: Obtener ventas por rango de fechas
-const getVentasPorFecha = (req, res) => {
-  const { fechaInicial, fechaFinal } = req.query; // Usa req.query para parámetros opcionales
+const getVentasPorFecha = async (req, res) => {
+  const { fechaInicial, fechaFinal } = req.query;
   
   if (!fechaInicial || !fechaFinal) {
     return res.status(400).json({ message: 'Se requieren las fechas inicial y final para la búsqueda.' });
   }
 
-  const ventasFiltradas = ventasDB.filter(venta => {
+  const ventas = await VentaModel.findAll();
+  const ventasFiltradas = ventas.filter(venta => {
     const fechaVenta = new Date(venta.fechaVenta);
     return fechaVenta >= new Date(fechaInicial) && fechaVenta <= new Date(fechaFinal);
   });
@@ -70,36 +69,31 @@ const getVentasPorFecha = (req, res) => {
   res.status(200).json(ventasFiltradas);
 };
 
-// Mantenemos las funciones existentes para CRUD
-const createVenta = (req, res) => {
-  const nuevaVenta = req.body;
-  nuevaVenta.id = uuidv4();
-  ventasDB.push(nuevaVenta);
+// --- Operaciones CRUD (Crear, Actualizar, Eliminar) ---
+
+const createVenta = async (req, res) => {
+  const nuevaVenta = await VentaModel.create(req.body);
   res.status(201).json({ message: 'Venta creada exitosamente.', venta: nuevaVenta });
 };
 
-const updateVenta = (req, res) => {
+const updateVenta = async (req, res) => {
   const { id } = req.params;
   const datosActualizados = req.body;
-  const index = ventasDB.findIndex(v => v.id === id);
+  const ventaActualizada = await VentaModel.update(id, datosActualizados);
 
-  if (index === -1) {
+  if (!ventaActualizada) {
     return res.status(404).json({ message: 'Venta no encontrada para actualizar.' });
   }
-
-  ventasDB[index] = { ...ventasDB[index], ...datosActualizados, id };
-  res.status(200).json({ message: 'Venta actualizada exitosamente.', venta: ventasDB[index] });
+  res.status(200).json({ message: 'Venta actualizada exitosamente.', venta: ventaActualizada });
 };
 
-const deleteVenta = (req, res) => {
+const deleteVenta = async (req, res) => {
   const { id } = req.params;
-  const index = ventasDB.findIndex(v => v.id === id);
+  const fueEliminada = await VentaModel.delete(id);
 
-  if (index === -1) {
+  if (!fueEliminada) {
     return res.status(404).json({ message: 'Venta no encontrada para eliminar.' });
   }
-
-  ventasDB.splice(index, 1);
   res.status(200).json({ message: 'Venta eliminada exitosamente.' });
 };
 
