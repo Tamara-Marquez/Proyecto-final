@@ -1,38 +1,60 @@
 // ventas.validator.js
-import { body, param } from "express-validator";
+import { Router } from "express";
+import { checkSchema, validationResult } from "express-validator";
 
-export const createVentaValidator = [
-    body("fecha")
-        .notEmpty().withMessage("La fecha es obligatoria")
-        .isISO8601().withMessage("La fecha debe tener un formato válido (YYYY-MM-DD)"),
-    body("total")
-        .notEmpty().withMessage("El total es obligatorio")
-        .isFloat({ gt: 0 }).withMessage("El total debe ser un número mayor a 0"),
-    body("cliente_id")
-        .notEmpty().withMessage("El cliente es obligatorio")
-        .isInt({ gt: 0 }).withMessage("El cliente_id debe ser un número entero positivo"),
-];
+// Importar los validadores y el controlador
+import {
+  createVentaValidator,
+  updateVentaValidator,
+  getVentaByIdValidator,
+  deleteVentaValidator,
+} from "../validators/ventas.validator.js";
+import {
+  createVenta,
+  updateVenta,
+  getVentaById,
+  deleteVenta,
+} from "../controllers/ventas.controller.js";
 
-export const updateVentaValidator = [
-    param("id")
-        .isInt({ gt: 0 }).withMessage("El ID debe ser un número entero positivo"),
-    body("fecha")
-        .optional()
-        .isISO8601().withMessage("La fecha debe tener un formato válido (YYYY-MM-DD)"),
-    body("total")
-        .optional()
-        .isFloat({ gt: 0 }).withMessage("El total debe ser un número mayor a 0"),
-    body("cliente_id")
-        .optional()
-        .isInt({ gt: 0 }).withMessage("El cliente_id debe ser un número entero positivo"),
-];
+const router = Router();
 
-export const getVentaByIdValidator = [
-    param("id")
-        .isInt({ gt: 0 }).withMessage("El ID debe ser un número entero positivo"),
-];
+// Middleware para manejar los resultados de la validación
+const handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
 
-export const deleteVentaValidator = [
-    param("id")
-        .isInt({ gt: 0 }).withMessage("El ID debe ser un número entero positivo"),
-];
+// Rutas de ventas
+router.post(
+  "/",
+  createVentaValidator,
+  handleValidationErrors,
+  createVenta
+);
+
+router.put(
+  "/:id",
+  updateVentaValidator,
+  handleValidationErrors,
+  updateVenta
+);
+
+router.get(
+  "/:id",
+  getVentaByIdValidator,
+  handleValidationErrors,
+  getVentaById
+);
+
+router.delete(
+  "/:id",
+  deleteVentaValidator,
+  handleValidationErrors,
+  deleteVenta
+);
+
+export default router;
+
