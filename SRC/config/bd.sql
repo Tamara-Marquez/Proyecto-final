@@ -6,52 +6,56 @@ use Tienda;
 
  
 create table rol (
-  id_rol INT AUTO_INCREMENT PRIMARY KEY,
-  nombre_rol VARCHAR (40) NOT NULL
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR (40) NOT NULL
 );
 
 create table usuarios (
-id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(20) NOT NULL,
-apellido VARCHAR(20) NOT NULL,
-email VARCHAR (40) NOT NULL,
-password  VARCHAR (200) NOT NULL,
-id_rol INT ,
-FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
-  ON UPDATE CASCADE ON DELETE SET NULL
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL,
+    apellido VARCHAR(20) NOT NULL,
+    email VARCHAR (40) NOT NULL,
+    password  VARCHAR (200) NOT NULL,
+    id_rol INT ,
+    FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
+      ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
 create table categorias (
-id_categoria SMALLINT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(50) NOT NULL UNIQUE
+    id_categoria SMALLINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
 create table productos (
-id_producto INT AUTO_INCREMENT PRIMARY KEY,
-marca VARCHAR(50) NOT NULL,
-modelo VARCHAR(50) NOT NULL,
-anio INT NOT NULL,
-precio DECIMAL(12,2) NOT NULL,
-estado ENUM('disponible','vendido') DEFAULT 'disponible',
-descripcion TEXT,
-id_categoria SMALLINT,
-id_usuario INT,
-FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
-	ON UPDATE CASCADE ON DELETE SET NULL,
-FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
-	ON UPDATE CASCADE ON DELETE SET NULL
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    marca VARCHAR(50) NOT NULL,
+    modelo VARCHAR(50) NOT NULL,
+    anio INT NOT NULL,
+    precio DECIMAL(12,2) NOT NULL,
+    estado ENUM('disponible','vendido') DEFAULT 'disponible',
+    descripcion TEXT,
+    id_categoria SMALLINT,
+    id_usuario INT,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
+      ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
+      ON UPDATE CASCADE ON DELETE SET NULL
 ); 
 
 
-create table ventas (
-id_venta INT AUTO_INCREMENT PRIMARY KEY,
-id_usuario INT,
-fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-total DECIMAL(10,2) NOT NULL,
-FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-	ON UPDATE CASCADE ON DELETE SET NULL
+CREATE TABLE ventas (
+    id_venta INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_producto INT UNIQUE, 
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+        ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+        ON UPDATE CASCADE ON DELETE SET NULL
 );
+
 
 
 -- ROLES --

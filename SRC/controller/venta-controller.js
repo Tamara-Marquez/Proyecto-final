@@ -1,103 +1,4 @@
-// ventas.controller.js
-// ventas.controller.js
-
-
-
-const VentaModel = require('../models/ventas.model');
-
-// --- Funciones de controlador sin lógica de validación ---
-
-const getVentas = async (req, res) => {
-  const ventas = await VentaModel.findAll();
-  res.status(200).json(ventas);
-};
-
-const getVentaById = async (req, res) => {
-  const { id } = req.params;
-  const venta = await VentaModel.findById(id);
-
-  if (!venta) {
-    return res.status(404).json({ message: 'Venta no encontrada.' });
-  }
-  res.status(200).json(venta);
-};
-
-const getVentasPorCliente = async (req, res) => {
-  const { clienteId } = req.params;
-  const ventasDelCliente = await VentaModel.findByClienteId(clienteId);
-  res.status(200).json(ventasDelCliente);
-};
-
-const getTotalDeVentas = async (req, res) => {
-    const ventas = await VentaModel.findAll();
-    const total = ventas.reduce((acumulador, venta) => acumulador + venta.total, 0);
-    res.status(200).json({ totalVentas: total });
-};
-
-const getProductoMasVendido = async (req, res) => {
-    const ventas = await VentaModel.findAll();
-    const conteoProductos = {};
-    ventas.forEach(venta => {
-        venta.productos.forEach(producto => {
-            const { productoId, cantidad } = producto;
-            conteoProductos[productoId] = (conteoProductos[productoId] || 0) + cantidad;
-        });
-    });
-
-    const productosOrdenados = Object.keys(conteoProductos).sort((a, b) => conteoProductos[b] - conteoProductos[a]);
-    const productoMasVendido = productosOrdenados[0];
-
-    res.status(200).json({
-        productoId: productoMasVendido,
-        cantidadVendida: conteoProductos[productoMasVendido]
-    });
-};
-
-const getVentasPorFecha = async (req, res) => {
-  const { fechaInicial, fechaFinal } = req.query;
-  
-  if (!fechaInicial || !fechaFinal) {
-    return res.status(400).json({ message: 'Se requieren las fechas inicial y final para la búsqueda.' });
-  }
-
-  const ventas = await VentaModel.findAll();
-  const ventasFiltradas = ventas.filter(venta => {
-    const fechaVenta = new Date(venta.fechaVenta);
-    return fechaVenta >= new Date(fechaInicial) && fechaVenta <= new Date(fechaFinal);
-  });
-
-  res.status(200).json(ventasFiltradas);
-};
-
-// --- Operaciones CRUD (Crear, Actualizar, Eliminar) ---
-
-const createVenta = async (req, res) => {
-  const nuevaVenta = await VentaModel.create(req.body);
-  res.status(201).json({ message: 'Venta creada exitosamente.', venta: nuevaVenta });
-};
-
-const updateVenta = async (req, res) => {
-  const { id } = req.params;
-  const datosActualizados = req.body;
-  const ventaActualizada = await VentaModel.update(id, datosActualizados);
-
-  if (!ventaActualizada) {
-    return res.status(404).json({ message: 'Venta no encontrada para actualizar.' });
-  }
-  res.status(200).json({ message: 'Venta actualizada exitosamente.', venta: ventaActualizada });
-};
-
-const deleteVenta = async (req, res) => {
-  const { id } = req.params;
-  const fueEliminada = await VentaModel.delete(id);
-
-  if (!fueEliminada) {
-    return res.status(404).json({ message: 'Venta no encontrada para eliminar.' });
-  }
-  res.status(200).json({ message: 'Venta eliminada exitosamente.' });
-};
-
-module.exports = {
+import {
   getVentas,
   getVentaById,
   getVentasPorCliente,
@@ -106,5 +7,115 @@ module.exports = {
   getVentasPorFecha,
   createVenta,
   updateVenta,
-  deleteVenta,
+  deleteVenta
+} from "../model/ventas-model.js";
+
+// 📌 Obtener todas las ventas
+export const obtenerVentas = async (req, res) => {
+  try {
+    const ventas = await getVentas();
+    res.status(200).json(ventas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener ventas", error: error.message });
+  }
+};
+
+// 📌 Obtener venta por ID
+export const obtenerVentaPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const venta = await getVentaById(id);
+
+    if (!venta) {
+      return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
+    }
+
+    res.status(200).json(venta);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener venta", error: error.message });
+  }
+};
+
+// 📌 Ventas por cliente
+export const obtenerVentasPorCliente = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ventas = await getVentasPorCliente(id);
+    res.status(200).json(ventas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener ventas por cliente", error: error.message });
+  }
+};
+
+// 📌 Total de ventas
+export const obtenerTotalDeVentas = async (req, res) => {
+  try {
+    const total = await getTotalDeVentas();
+    res.status(200).json({ total });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener total de ventas", error: error.message });
+  }
+};
+
+// 📌 Producto más vendido
+export const obtenerProductoMasVendido = async (req, res) => {
+  try {
+    const producto = await getProductoMasVendido();
+    res.status(200).json(producto);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener el producto más vendido", error: error.message });
+  }
+};
+
+// 📌 Ventas por fecha
+export const obtenerVentasPorFecha = async (req, res) => {
+  try {
+    const { fechaInicio, fechaFin } = req.query;
+    const ventas = await getVentasPorFecha(fechaInicio, fechaFin);
+    res.status(200).json(ventas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener ventas por fecha", error: error.message });
+  }
+};
+
+// 📌 Crear venta
+export const crearVenta = async (req, res) => {
+  try {
+    const nuevaVenta = await createVenta(req.body);
+    res.status(201).json({ mensaje: "Venta creada exitosamente", venta: nuevaVenta });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al crear la venta", error: error.message });
+  }
+};
+
+// 📌 Actualizar venta
+export const actualizarVenta = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ventaActualizada = await updateVenta(id, req.body);
+
+    res.status(200).json({ mensaje: "Venta actualizada", venta: ventaActualizada });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al actualizar la venta", error: error.message });
+  }
+};
+
+// 📌 Eliminar venta
+export const eliminarVenta = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteVenta(id);
+    res.status(200).json({ mensaje: "Venta eliminada correctamente" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al eliminar la venta", error: error.message });
+  }
 };

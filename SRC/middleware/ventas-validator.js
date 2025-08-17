@@ -1,61 +1,56 @@
+import { pool } from "../config/bd.js";
 
-import { Router } from "express";
-import { checkSchema, validationResult } from "express-validator";
+// ✅ Validar que el id_usuario exista
+export const validateUsuario = async (req, res, next) => {
+  const { id_usuario } = req.body;
+  if (!id_usuario) {
+    return res.status(400).json({ mensaje: "id_usuario es obligatorio" });
+  }
 
-// Importar los validadores y el controlador
-import {
-  createVentaValidator,
-  updateVentaValidator,
-  getVentaByIdValidator,
-  deleteVentaValidator,
-} from "../validators/ventas.validator.js";
-import {
-  createVenta,
-  updateVenta,
-  getVentaById,
-  deleteVenta,
-} from "../controllers/ventas.controller.js";
+  const [rows] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
+  if (rows.length === 0) {
+    return res.status(404).json({ mensaje: `No existe el usuario con id ${id_usuario}` });
+  }
 
-const router = Router();
+  next();
+};
 
-// Middleware para manejar los resultados de la validación
-const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+// ✅ Validar que el id_producto exista y esté disponible
+export const validateProducto = async (req, res, next) => {
+  const { id_producto } = req.body;
+  if (!id_producto) {
+    return res.status(400).json({ mensaje: "id_producto es obligatorio" });
+  }
+
+  const [rows] = await pool.query(
+    "SELECT * FROM productos WHERE id_producto = ? AND estado = 'disponible'",
+    [id_producto]
+  );
+
+  if (rows.length === 0) {
+    return res.status(404).json({ mensaje: `Producto no existe o ya está vendido` });
+  }
+
+  next();
+};
+
+// ✅ Validar que el total sea un número positivo
+export const validateTotal = (req, res, next) => {
+  const { total } = req.body;
+  if (total === undefined || isNaN(total) || total <= 0) {
+    return res.status(400).json({ mensaje: "total debe ser un número positivo" });
   }
   next();
 };
 
-// Rutas de ventas
-router.post(
-  "/",
-  createVentaValidator,
-  handleValidationErrors,
-  createVenta
-);
+// ✅ Validar que el id de la venta exista (para update o delete)
+export const validateVentaId = async (req, res, next) => {
+  const { id } = req.params;
+  const [rows] = await pool.query("SELECT * FROM ventas WHERE id_venta = ?", [id]);
 
-router.put(
-  "/:id",
-  updateVentaValidator,
-  handleValidationErrors,
-  updateVenta
-);
+  if (rows.length === 0) {
+    return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
+  }
 
-router.get(
-  "/:id",
-  getVentaByIdValidator,
-  handleValidationErrors,
-  getVentaById
-);
-
-router.delete(
-  "/:id",
-  deleteVentaValidator,
-  handleValidationErrors,
-  deleteVenta
-);
-
-export default router;
-
-
+  next();
+};

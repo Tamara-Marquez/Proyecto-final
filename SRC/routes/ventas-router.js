@@ -1,27 +1,31 @@
-// src/routes/ventas.routes.js
+import { Router } from "express";
+import {
+  getVentas,
+  getVentaById,
+  getVentasPorCliente,
+  getVentasPorFecha,
+  getTotalDeVentas,
+  getProductoMasVendido,
+  createVenta,
+  updateVenta,
+  deleteVenta
+} from "../controller/ventas-controller.js";
 
-const express = require('express');
-const router = express.Router();
-const ventasController = require('../controllers/ventas.controller');
-const { ventasSchema, validate } = require('../validators/ventas.validator');
+const router = Router();
 
-// Rutas de lectura (no necesitan validación del cuerpo de la solicitud)
-router.get('/', ventasController.getVentas);
-router.get('/:id', ventasController.getVentaById);
-router.get('/reportes/por-cliente/:clienteId', ventasController.getVentasPorCliente);
-router.get('/reportes/total', ventasController.getTotalDeVentas);
-router.get('/reportes/producto-mas-vendido', ventasController.getProductoMasVendido);
-router.get('/reportes/por-fecha', ventasController.getVentasPorFecha);
+// Rutas GET
+router.get("/", getVentas);
+router.get("/:id", getVentaById);
+router.get("/cliente/:idUsuario", getVentasPorCliente);
+router.get("/fecha/:fecha", getVentasPorFecha);
+router.get("/total", getTotalDeVentas);
+router.get("/mas-vendido", getProductoMasVendido);
 
-// Rutas de creación y actualización (necesitan validación)
-// Aquí se inserta el middleware 'validate(ventasSchema)'
-router.post('/', validate(ventasSchema), ventasController.createVenta);
-router.put('/:id', validate(ventasSchema), ventasController.updateVenta);
+// Rutas POST, PUT, DELETE
+router.post("/", createVenta);
+router.put("/:id", updateVenta);
+router.delete("/:id", deleteVenta);
 
-// Ruta de eliminación (no necesita validación del cuerpo de la solicitud)
-router.delete('/:id', ventasController.deleteVenta);
-
-module.exports = router;
-
+export default router;
 
 
