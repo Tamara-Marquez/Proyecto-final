@@ -11,3 +11,5 @@ router.post('/usuario',valCreateUser, registerUser);
 router.post('/usuario/login',isAutenticated,login);
 router.put('/usuario/:id',valUpdataUser, updataById);
 router.delete ('/usuario/:id',valUserById, deleted);
+
+export default router;

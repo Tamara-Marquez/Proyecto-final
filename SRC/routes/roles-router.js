@@ -9,3 +9,5 @@ router.get ('/Rol/:id',valUserById, getById);
 router.post('/Rol',valCreateUser, registerUser);
 router.put('/Rol/:id',valUpdataUser, updataById);
 router.delete ('/Rol/:id',valUserById, deleted);
+
+export default router;

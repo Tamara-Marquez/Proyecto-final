@@ -1,6 +1,6 @@
 import { pool } from "../config/bd.js";
 
-// 📌 Obtener todas las ventas con info de usuario y producto
+
 export const getVentas = async () => {
   const query = `
     SELECT v.id_venta, v.fecha, v.total,
@@ -15,7 +15,7 @@ export const getVentas = async () => {
   return rows;
 };
 
-// 📌 Obtener venta por ID
+
 export const getVentaById = async (id) => {
   const query = `
     SELECT v.id_venta, v.fecha, v.total,
@@ -30,7 +30,7 @@ export const getVentaById = async (id) => {
   return rows.length ? rows[0] : null;
 };
 
-// 📌 Obtener ventas por cliente
+
 export const getVentasPorCliente = async (idUsuario) => {
   const query = `
     SELECT v.id_venta, v.fecha, v.total,
@@ -44,14 +44,14 @@ export const getVentasPorCliente = async (idUsuario) => {
   return rows;
 };
 
-// 📌 Total de ventas (suma de totales)
+
 export const getTotalDeVentas = async () => {
   const query = `SELECT SUM(total) AS total FROM ventas`;
   const [rows] = await pool.query(query);
   return rows[0]?.total || 0;
 };
 
-// 📌 Producto más vendido
+
 export const getProductoMasVendido = async () => {
   const query = `
     SELECT p.marca, p.modelo, p.anio, COUNT(*) AS veces_vendido
@@ -65,7 +65,7 @@ export const getProductoMasVendido = async () => {
   return rows.length ? rows[0] : null;
 };
 
-// 📌 Ventas por fecha
+
 export const getVentasPorFecha = async (fechaInicio, fechaFin) => {
   const query = `
     SELECT v.id_venta, v.fecha, v.total,
@@ -81,7 +81,7 @@ export const getVentasPorFecha = async (fechaInicio, fechaFin) => {
   return rows;
 };
 
-// 📌 Crear venta
+
 export const createVenta = async ({ id_usuario, id_producto, total }) => {
   const query = `
     INSERT INTO ventas (id_usuario, id_producto, total)
@@ -91,7 +91,7 @@ export const createVenta = async ({ id_usuario, id_producto, total }) => {
   return { id_venta: result.insertId, id_usuario, id_producto, total };
 };
 
-// 📌 Actualizar venta
+
 export const updateVenta = async (id, { id_usuario, id_producto, total }) => {
   const query = `
     UPDATE ventas
@@ -102,7 +102,7 @@ export const updateVenta = async (id, { id_usuario, id_producto, total }) => {
   return result.affectedRows ? { id_venta: id, id_usuario, id_producto, total } : null;
 };
 
-// 📌 Eliminar venta
+
 export const deleteVenta = async (id) => {
   const query = `DELETE FROM ventas WHERE id_venta = ?`;
   const [result] = await pool.query(query, [id]);
