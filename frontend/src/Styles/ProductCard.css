@@ -1,0 +1,163 @@
+
+/* opcion*/
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters select,
+.filters input {
+  padding: 8px 12px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.filters input {
+  width: 200px;
+}
+.catalogo > div {
+  margin-bottom: 40px;
+}
+
+.catalogo h2 {
+  color: #222;
+  margin-bottom: 15px;
+  text-align: left;
+  padding-left: 10px;
+  border-left: 5px solid #1b1e1b;
+}
+
+/* Contenedor de las cards (rejilla) */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill, 
+    minmax(
+      250px,
+      1fr));
+  gap: 1rem;
+  justify-items: center;
+
+
+}
+
+/* Card de producto */
+.product-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+/* Imagen del producto */
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Detalles del producto */
+.product-details {
+  padding: 15px;
+  text-align: left;
+}
+
+.product-name {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.product-info {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.product-price {
+  margin-top: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #171515f6;
+}
+
+
+.buy-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #303230;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+
+
+.filtros {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px;
+  justify-content: center;
+}
+
+.filtros select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filtros select:hover {
+  background-color: #333;
+  border-color: #666;
+}
+
+.filtros select:focus {
+  outline: none;
+  border-color: #999;
+  background-color: #111;
+}
+
+.filtros option {
+  background: #222;
+  color: #eee;
+}
+
+
+/* Responsive para pantallas chicas */
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogo h2 {
+    font-size: 1.2em;
+  }}
+
+
+
+  /*opcion 2*/ 
+
+  

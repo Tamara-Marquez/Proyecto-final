@@ -1,0 +1,291 @@
+{
+    "categorias": [
+        {
+        "id_categoria": 1,
+        "nombre": "auto",
+        "productos": [
+            {
+                "id_producto": 1,
+                "marca": "Volkswagen",
+                "modelo": "Gol Trend",
+                "anio": 2018,
+                "precio": 5500000,
+                "estado": "disponible",
+                "descripcion": "Hatchback 1.6, económico y confiable",
+                "image": "https://resizer.glanacion.com/resizer/v2/desde-1991-cuando-se-lanzo-su-primera-generacion-W3ROWBMPXRB3DMDV6X4TK6VRME.jpg?auth=47d968b72f92c5f885643133749c74a6607e2fcfe69c2bb06a76e2e4385b039c&width=768&quality=70&smart=false",
+                "cantidad": 5
+            },
+            {
+                "id_producto": 2,
+                "marca": "Volkswagen",
+                "modelo": "Polo",
+                "anio": 2021,
+                "precio": 8200000,
+                "estado": "disponible",
+                "descripcion": "Sedán compacto, motor 1.6 MSI",
+                "image": "https://hips.hearstapps.com/hmg-prod/images/volkswagen-polo-2021-frontal-02-1618931695.jpg",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 3,
+                "marca": "Volkswagen",
+                "modelo": "Virtus",
+                "anio": 2020,
+                "precio": 9500000,
+                "estado": "disponible",
+                "descripcion": "Sedán amplio, buena seguridad",
+                "image": "https://www.volkswagen.com.ar/content/dam/onehub_pkw/importers/ar/modelos/virtus/2024/CONSECIONARIOS-virtus.jpg",
+                "cantidad": 5
+            },
+            {
+                "id_producto": 4,
+                "marca": "Volkswagen",
+                "modelo": "Amarok",
+                "anio": 2019,
+                "precio": 13500000,
+                "estado": "disponible",
+                "descripcion": "Pick-up doble cabina 2.0 TDI 4x4",
+                "image": "https://hauswagen.com.ar/wp-content/uploads/2024/12/H4sIAAAAAAAA_y2Uu87dRBCATxKFIIogQAjRo19IkZhd310coSR0CJQChSLFr1nvxf69Xtt7sc9xxQPlIXgPmrwAFQ0NEnOkSJY-removebg-preview.png",
+                "cantidad": 2
+            },
+            {
+                "id_producto": 5,
+                "marca": "Volkswagen",
+                "modelo": "T-Cross",
+                "anio": 2022,
+                "precio": 15500000,
+                "estado": "disponible",
+                "descripcion": "SUV compacto con tecnología moderna",
+                "image": "https://acroadtrip.blob.core.windows.net/catalogo-imagenes/xl/RT_V_919ce2d849984b2b8641f038f2a619b5.webp",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 6,
+                "marca": "Fiat",
+                "modelo": "Cronos",
+                "anio": 2022,
+                "precio": 9200000,
+                "estado": "disponible",
+                "descripcion": "Sedán argentino más vendido",
+                "image": "https://www.deruedas.com.ar/images/vehiculos/9592_im.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 7,
+                "marca": "Fiat",
+                "modelo": "Argo",
+                "anio": 2021,
+                "precio": 8700000,
+                "estado": "disponible",
+                "descripcion": "Hatchback moderno y económico",
+                "image": "https://cloudfront-us-east-1.images.arcpublishing.com/artear/JDT544U5FBAS7CIRC7ZCAYABLY.jpg",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 8,
+                "marca": "Fiat",
+                "modelo": "Toro",
+                "anio": 2020,
+                "precio": 14000000,
+                "estado": "disponible",
+                "descripcion": "Pick-up intermedia, ideal ciudad y campo",
+                "image": "https://cdn.motor1.com/images/mgl/be9m6/s1/nueva-fiat-toro-2022-fotos-datos-y-video-del-restyling-de-la-pick-up-compacta.webp",
+                "cantidad": 2
+            },
+            {
+                "id_producto": 9,
+                "marca": "Fiat",
+                "modelo": "500X",
+                "anio": 2019,
+                "precio": 12500000,
+                "estado": "disponible",
+                "descripcion": "Compacto retro, muy equipado",
+                "image": "https://www.motoryracing.com/images/noticias/portada/24000/24954-n.jpg",
+                "cantidad": 1
+            },
+            {
+                "id_producto": 10,
+                "marca": "Fiat",
+                "modelo": "Punto",
+                "anio": 2017,
+                "precio": 6800000,
+                "estado": "disponible",
+                "descripcion": "Hatchback confiable y económico",
+                "image": "https://i0.wp.com/tiempomotor.com/wp-content/uploads/2016/06/fiat_punto_2017_2_0.jpg?fit=960%2C640&ssl=1&,resize=1280%2C720",
+                "cantidad": 3
+            }
+    ]
+},
+    {
+        "id_categoria": 2,
+        "nombre": "moto",
+        "productos": [
+            {
+                "id_producto": 11,
+                "marca": "Honda",
+                "modelo": "CBR 500R",
+                "anio": 2021,
+                "precio": 9500000,
+                "estado": "disponible",
+                "descripcion": "Deportiva de media cilindrada",
+                "image": "https://www.honda.es/content/dam/central/motorcycles/colour-picker/supersports/cbr500r/cbr500r_2024/nh-436m_mattegunpowderblackmetallic/24YM_CBR500R_Studio_MAT_GUNPOWDER_BLACK_METALLIC_RHS.png/jcr:content/renditions/m_r.png",
+                "cantidad": 5
+            },
+            {
+                "id_producto": 12,
+                "marca": "Honda",
+                "modelo": "XR 150L",
+                "anio": 2020,
+                "precio": 3800000,
+                "estado": "disponible",
+                "descripcion": "Enduro liviana, ideal ciudad y campo",
+                "image": "https://motos.fussetti.com/wp-content/uploads/2020/06/1447.1677188177.png",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 13,
+                "marca": "Honda",
+                "modelo": "CB Twister 250",
+                "anio": 2022,
+                "precio": 4800000,
+                "estado": "disponible",
+                "descripcion": "Naked versátil de 250cc",
+                "image": "https://corrientesmotos.com.ar/wp-content/uploads/2020/05/03B48229-E632-44ED-A386-AFCA3D3BF6DE-scaled.jpeg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 14,
+                "marca": "Honda",
+                "modelo": "Wave 110S",
+                "anio": 2019,
+                "precio": 2200000,
+                "estado": "disponible",
+                "descripcion": "Ciclomotor económico y confiable",
+                "image": "https://http2.mlstatic.com/D_787882-MLA81775417188_012025-C.jpg",
+                "cantidad": 5
+            },
+            {
+                "id_producto": 15,
+                "marca": "Honda",
+                "modelo": "Africa Twin 1100",
+                "anio": 2021,
+                "precio": 21500000,
+                "estado": "disponible",
+                "descripcion": "Adventure touring premium",
+                "image": "https://www.moto1pro.com/sites/default/files/honda_crf-1000-l-africa_twin-2021.jpg",
+                "cantidad": 2
+            },
+            {
+                "id_producto": 16,
+                "marca": "Motomel",
+                "modelo": "Sirius 190",
+                "anio": 2022,
+                "precio": 2500000,
+                "estado": "disponible",
+                "descripcion": "Street económico y moderno",
+                "image":"https://www.aszisa.com.ar/378-large_default/moto-motomel-sirius-190.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 17,
+                "marca": "Motomel",
+                "modelo": "XMM 250",
+                "anio": 2021,
+                "precio": 3100000,
+                "estado": "disponible",
+                "descripcion": "Motocross nacional accesible",
+                "image": "https://http2.mlstatic.com/D_NQ_NP_847256-MLA47919217489_102021-O.webp",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 18,
+                "marca": "Motomel",
+                "modelo": "Blitz 110",
+                "anio": 2020,
+                "precio": 1700000,
+                "estado": "disponible",
+                "descripcion": "Moto básica de ciudad",
+                "image": "https://http2.mlstatic.com/D_724415-MLA77082433250_062024-C.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 19,
+                "marca": "Motomel",
+                "modelo": "Skua 150",
+                "anio": 2021,
+                "precio": 2800000,
+                "estado": "disponible",
+                "descripcion": "Enduro accesible para principiantes",
+                "image":"https://yuhmak.vtexassets.com/arquivos/ids/176297/M0011200846-2024--2-.png?v=638310071696070000",
+                "cantidad": 4
+            },
+            {
+                "id_producto": 20,
+                "marca": "Motomel",
+                "modelo": "S2 150",
+                "anio": 2019,
+                "precio": 2300000,
+                "estado": "disponible",
+                "descripcion": "Moto urbana confiable",
+                "image": "https://http2.mlstatic.com/D_646265-MLA73955301208_012024-C.jpg",
+                "cantidad": 5
+            },
+            {
+                "id_producto": 21,
+                "marca": "Rouser",
+                "modelo": "RS 200",
+                "anio": 2021,
+                "precio": 4600000,
+                "estado": "disponible",
+                "descripcion": "Naked deportiva de 200cc",
+                "image": "https://cetrogarmotos.com.ar/wp-content/uploads/mo0538.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 22,
+                "marca": "Rouser",
+                "modelo": "NS 200",
+                "anio": 2022,
+                "precio": 4200000,
+                "estado": "disponible",
+                "descripcion": "Deportiva carenada, 200cc",
+                "image": "https://www.arizonamotos.com.ar/Image/0/500_500-ns200_amarilla_detalle.jpg",
+                "cantidad": 1
+            },
+            {
+                "id_producto": 23,
+                "marca": "Rouser",
+                "modelo": "NS 160",
+                "anio": 2020,
+                "precio": 3600000,
+                "estado": "disponible",
+                "descripcion": "Moto ligera y económica",
+                "image": "https://motos0km.com.ar/models/bajaj-rouser-ns-160-gallery-000000-020181012194138.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 24,
+                "marca": "Rouser",
+                "modelo": "NS 125",
+                "anio": 2019,
+                "precio": 2800000,
+                "estado": "disponible",
+                "descripcion": "Moto básica ideal ciudad",
+                "image": "https://www.motozuni.com.ar/fotos/1675972615rouserns125_edit-14.jpg",
+                "cantidad": 3
+            },
+            {
+                "id_producto": 25,
+                "marca": "Rouser",
+                "modelo": "AS 200",
+                "anio": 2018,
+                "precio": 4000000,
+                "estado": "disponible",
+                "descripcion": "Adventure sport, versátil en rutas",
+                "image": "https://motos0km.com.ar/models/bajaj-rouser-as-200-gallery-0000ff-120181103224218.jpg",
+                "cantidad": 4
+            }
+]
+    }
+        ]
+}

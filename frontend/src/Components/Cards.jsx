@@ -1,0 +1,41 @@
+import React from 'react';
+import '../Styles/ProductCard.css'; 
+import { AddToCartIcon, RemoveFromCartIcon } from '../assets/icon';
+import { useCart } from '../Hooks/useCart.js'
+
+const Cards = ({ categoriaNombre, producto }) => {
+
+const { id_producto, marca, modelo, anio, precio, image, estado } = producto;
+
+const { addToCart, removeFromCart, cart } = useCart();
+
+const inCart = cart.some(item => item.id_producto === id_producto);
+
+return (
+    <div className="product-card">
+    <img 
+        src={image}
+        alt={`${marca} ${modelo}`} 
+        className="product-image" 
+    />
+    <div className="product-details">
+        <h3 className="product-name">{modelo} {marca}</h3>
+        <p className="product-info">Año: <strong>{anio}</strong></p>
+        <p className="product-info">Vehículo: <strong>{categoriaNombre}</strong></p>
+        <p className="product-info">Estado: <strong>{estado}</strong></p>
+        <div className="product-price">
+        ${precio.toLocaleString('es-AR')}
+    </div>
+        <button
+            style={{ backgroundColor: inCart ? "red" : "#09f" }}
+            onClick={() => inCart ? removeFromCart(producto) : addToCart(producto)}
+        >
+        {inCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
+        </button>
+    </div>
+    </div>
+);
+};
+
+export default Cards;
+
