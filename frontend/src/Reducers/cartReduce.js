@@ -12,6 +12,8 @@ export const updateLocalStorage = state => {
   window.localStorage.setItem('cart', JSON.stringify(state))
 }
 
+// guarda las acciones que hace el state
+
 const UPDATE_STATE_BY_ACTION = {
   [CART_ACTION_TYPES.ADD_TO_CART]: (state, action) => {
     const { id_producto } = action.payload
@@ -37,7 +39,7 @@ const UPDATE_STATE_BY_ACTION = {
     const newState = [
       ...state,
       {
-        ...action.payload, // product
+        ...action.payload, 
         cantidad: 1
       }
     ]

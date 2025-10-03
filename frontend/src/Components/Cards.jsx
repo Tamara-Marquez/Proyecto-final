@@ -26,8 +26,8 @@ return (
         <div className="product-price">
         ${precio.toLocaleString('es-AR')}
     </div>
-        <button
-            style={{ backgroundColor: inCart ? "red" : "#09f" }}
+        <button className='buy-button'
+            style={{ backgroundColor: inCart ? "rgba(201, 20, 20, 0.89)" : "rgba(149, 155, 157, 1)" }}
             onClick={() => inCart ? removeFromCart(producto) : addToCart(producto)}
         >
         {inCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}

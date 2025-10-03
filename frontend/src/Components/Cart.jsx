@@ -3,12 +3,13 @@ import { useId, useState, useEffect } from 'react'
 import { CartIcon, ClearCartIcon } from '../assets/icon.jsx'
 import { useCart } from '../Hooks/useCart.js'
 
-function CartItem ({ image, precio, marca,modelo, cantidad, addToCart, removeFromCart, id_producto }) {
-const handleDecrement = () => {
-        if (cantidad === 1) {
-            removeFromCart({ id_producto })
-        } else {
-            decrementItem({ id_producto, cantidad:cantidad -1 })
+function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_producto }) {
+    const { decrementItem, removeFromCart,  } = useCart()
+        const handleDecrement = () => {
+            if (cantidad === 1) {
+                removeFromCart({ id_producto })
+        }   else {
+                decrementItem({ id_producto })
         }
     }
 
@@ -25,12 +26,15 @@ const handleDecrement = () => {
     <footer>
                 <div className="quantity-controls">
                     <button onClick={handleDecrement}>-</button>
-                    <small>Cantidad: {cantidad}</small>
+                    <small className='quantity'>Cantidad: {cantidad}</small>
                     <button onClick={addToCart}>+</button>
                 </div>
                 <small className="subtotal">
                     Subtotal: ${(precio * cantidad).toLocaleString('es-AR')}
                 </small>
+                <button onClick={() => removeFromCart({ id_producto })}>
+                    <ClearCartIcon />
+                </button>
     </footer>
     </li>
 )
@@ -38,7 +42,7 @@ const handleDecrement = () => {
 
 export function Cart () {
     const cartCheckboxId = useId()
-    const { cart, clearCart, addToCart } = useCart()
+    const { cart, clearCart, addToCart, removeFromCart } = useCart()
     const [isOpen, setIsOpen] = useState(false)
     const [prevCartLength, setPrevCartLength] = useState(0)
 
@@ -71,7 +75,12 @@ export function Cart () {
             <span className="cart-counter">{totalItems}</span>
         )}
         </label>
-    <input id={cartCheckboxId} type='checkbox' hidden />
+    <input 
+        id={cartCheckboxId} 
+        type='checkbox'
+        checked={isOpen} 
+        onChange={(e) => setIsOpen(e.target.checked)}
+        hidden />
 
     <aside className='cart'>
             <ul>
@@ -80,9 +89,10 @@ export function Cart () {
                 ) : (
                     cart.map(producto => (
                         <CartItem
-                            key={producto.id}
-                            addToCart={() => addToCart(producto)}
-                            {...producto}
+                            key={producto.id_producto}
+                                addToCart={() => addToCart(producto)}
+                                removeFromCart={removeFromCart} 
+                                {...producto}
                         />
                     ))
                 )}
@@ -92,10 +102,18 @@ export function Cart () {
                 <div className="cart-footer">
                     <div className="cart-total">
                         Total: ${totalPrice.toLocaleString('es-AR')}
-                    </div>
+                    </div >
+                    <div  className="quantity-controls">
                     <button onClick={clearCart}>
                         <ClearCartIcon />
                     </button>
+                    <div>
+                    <button className='end-buy' >
+                        Finalizar compra
+                    </button>
+                    </div>
+
+                    </div>
                 </div>
             )}
         </aside>

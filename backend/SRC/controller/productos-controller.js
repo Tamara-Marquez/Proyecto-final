@@ -7,7 +7,7 @@ export const getAllProductsController = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            mensaje: "Ocurrió un error al obtener los productos",
+            message: "Ocurrió un error al obtener los productos",
             error: error.message
         });
     }
@@ -15,18 +15,18 @@ export const getAllProductsController = async (req, res) => {
 
 export const getProductByIdController = async (req, res) => {
     try {
-        const { id } = req.params; // destructuring ES6
+        const { id } = req.params; 
         const producto = await getProductsById(id);
 
         if (!producto) {
-            return res.status(404).json({ mensaje: `No se encontró el producto con id ${id}` });
+            return res.status(404).json({ message: `No se encontró el producto con id ${id}` });
         }
 
         res.status(200).json(producto);
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            mensaje: "Ocurrió un error al obtener el producto",
+            message: "Ocurrió un error al obtener el producto",
             error: error.message
         });
     }
@@ -41,7 +41,7 @@ export const createProductController = async (req, res) => {
             producto: nuevoProducto
         });
     } catch (error) {
-        console.error("Error en createProductController:", error.message);
+        console.error("Error en crear el producto:", error.message);
         res.status(500).json({ error: "No se pudo crear el producto" });
     }
 };

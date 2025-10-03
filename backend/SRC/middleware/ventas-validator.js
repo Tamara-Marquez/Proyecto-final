@@ -36,18 +36,3 @@ export const validarIdVenta = [
 ];
 
 
-export const validarFechas = [
-  query("fechaInicio")
-    .notEmpty().withMessage("fechaInicio es obligatorio")
-    .isISO8601().withMessage("fechaInicio debe tener formato YYYY-MM-DD"),
-
-  query("fechaFin")
-    .notEmpty().withMessage("fechaFin es obligatorio")
-    .isISO8601().withMessage("fechaFin debe tener formato YYYY-MM-DD"),
-
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-    next();
-  }
-];

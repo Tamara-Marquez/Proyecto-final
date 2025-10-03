@@ -61,16 +61,7 @@ export const obtenerProductoMasVendido = async (req, res) => {
   }
 };
 
-export const obtenerVentasPorFecha = async (req, res) => {
-  try {
-    const { fechaInicio, fechaFin } = req.query;
-    const ventas = await getVentasPorFecha(fechaInicio, fechaFin);
-    res.status(200).json(ventas);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: "Error al obtener ventas por fecha", error: error.message });
-  }
-};
+
 
 export const crearVenta = async (req, res) => {
   try {
@@ -107,7 +98,6 @@ export const actualizarVenta = async (req, res) => {
     const [ventaExistente] = await pool.query("SELECT * FROM ventas WHERE id_venta = ?", [id]);
     if (ventaExistente.length === 0) return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
 
-   
     if (id_usuario) {
       const [usuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
       if (usuario.length === 0) return res.status(404).json({ mensaje: `No existe el usuario con id ${id_usuario}` });

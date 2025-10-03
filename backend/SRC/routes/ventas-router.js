@@ -1,19 +1,19 @@
 import { Router } from "express";
-import {getVentas, getVentaById, getVentasPorCliente, getVentasPorFecha, getTotalDeVentas, getProductoMasVendido, createVenta,updateVenta, deleteVenta} from "../controller/venta-controller.js";
-import { validarFechas, validarIdVenta, validarVenta } from "../middleware/ventas-validator.js";
+import{obtenerVentas, obtenerVentaPorId, obtenerVentasPorCliente, obtenerTotalDeVentas, obtenerProductoMasVendido, crearVenta, actualizarVenta, eliminarVenta} from "../controller/venta-controller.js"
+import { validarIdVenta, validarVenta } from "../middleware/ventas-validator.js";
+import { isAdmin } from "../middleware/roles-validator.js";
 
 const router = Router();
 
 
-router.get("/ventas", getVentas);
-router.get("/ventas/:id", validarIdVenta,getVentaById);
-router.get("/ventas/cliente/:idUsuario",validarIdVenta ,getVentasPorCliente);
-router.get("/ventas/fecha/:fecha",validarFechas, getVentasPorFecha);
-router.get("/ventas/total", getTotalDeVentas);
-router.get("/ventas/mas-vendido", getProductoMasVendido);
-router.post("/ventas", validarVenta,createVenta);
-router.put("/ventas/:id",validarIdVenta, validarVenta, updateVenta);
-router.delete("/ventas/:id",validarIdVenta, deleteVenta);
+router.get("/ventas",isAdmin, obtenerVentas);
+router.get("/ventas/:id",isAdmin, validarIdVenta,obtenerVentaPorId);
+router.get("/ventas/cliente/:idUsuario",isAdmin,validarIdVenta ,obtenerVentasPorCliente);
+router.get("/ventas/total",isAdmin, obtenerTotalDeVentas);
+router.get("/ventas/mas-vendido",isAdmin, obtenerProductoMasVendido);
+router.post("/ventas",isAdmin, validarVenta,crearVenta);
+router.put("/ventas/:id",isAdmin,validarIdVenta, validarVenta, actualizarVenta);
+router.delete("/ventas/:id",isAdmin,validarIdVenta, eliminarVenta);
 
 export default router;
 

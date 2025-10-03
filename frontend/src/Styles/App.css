@@ -4,7 +4,7 @@ html, body, #root {
     display: flex;
     flex-direction: column;
     background-color: brown;
-    font-family: sans-serif;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 0;
 }
 

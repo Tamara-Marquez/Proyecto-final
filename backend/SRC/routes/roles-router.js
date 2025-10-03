@@ -1,13 +1,16 @@
 import { Router } from "express";
-import {valCreateUser, valUserById, valUpdataUser} from "../middleware/usuarios-validator.js"
+import { getRole, getAllRoles, createNewRole, updateRole, deleteRole} from "../controller/roles-controller.js";
+import { valCreateRole, valRoleById, isAdmin } from "../middleware/roles-validator.js";
+import {isAutenticated} from "../middleware/usuarios-validator.js"
 
 
 const router = Router ();
 
-router.get ('/Rol', getAll);
-router.get ('/Rol/:id',valUserById, getById);
-router.post('/Rol',valCreateUser, registerUser);
-router.put('/Rol/:id',valUpdataUser, updataById);
-router.delete ('/Rol/:id',valUserById, deleted);
+router.get ('/rol',isAutenticated,  getAllRoles);
+router.get ('/rol/:id',isAutenticated, valRoleById,  getRole);
+router.post('/rol',isAutenticated,isAdmin, valCreateRole, createNewRole,);
+router.put('/rol/:id',isAutenticated, isAdmin, valRoleById, valCreateRole, updateRole);
+router.delete ('/rol/:id',isAutenticated,isAdmin, valRoleById, deleteRole);
+
 
 export default router;
