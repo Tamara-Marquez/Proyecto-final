@@ -2,8 +2,11 @@ import React from 'react';
 import '../Styles/ProductCard.css'; 
 import { AddToCartIcon, RemoveFromCartIcon } from '../assets/icon';
 import { useCart } from '../Hooks/useCart.js'
+import { useNavigate } from 'react-router-dom';
 
 const Cards = ({ categoriaNombre, producto }) => {
+
+    const navigate = useNavigate();
 
 const { id_producto, marca, modelo, anio, precio, image, estado } = producto;
 
@@ -26,12 +29,19 @@ return (
         <div className="product-price">
         ${precio.toLocaleString('es-AR')}
     </div>
+    <div className='container-button'>
         <button className='buy-button'
             style={{ backgroundColor: inCart ? "rgba(201, 20, 20, 0.89)" : "rgba(149, 155, 157, 1)" }}
             onClick={() => inCart ? removeFromCart(producto) : addToCart(producto)}
         >
         {inCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
         </button>
+        <button 
+        className='buy-button'
+        onClick={()=> navigate(`/productos/${id_producto}`)} >
+            Más información
+        </button>
+        </div>
     </div>
     </div>
 );

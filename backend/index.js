@@ -1,5 +1,5 @@
 import express from "express";
-
+import cors from "cors";
 import rolesRouter from "./SRC/routes/roles-router.js"; 
 import usuarioRouter from "./SRC/routes/usuario-router.js";
 import categoriaRouter from "./SRC/routes/categorias-router.js";
@@ -16,6 +16,7 @@ app.disable("x-powered-by");
 app.use(express.text());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 app.use("/api", rolesRouter);
 app.use("/api", usuarioRouter);

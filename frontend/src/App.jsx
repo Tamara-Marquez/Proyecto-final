@@ -7,6 +7,7 @@ import HomePage from "./Pages/HomePage";
 import Catalogo from './Pages/Catalogo';
 import Autos from './Components/Autos';
 import Motos from './Components/Motos';
+import DetalleProducto from "./Components/Detalles";
 import { useModal, ModalProvider } from "./Context/ModalContext";
 
 function AppContent() {
@@ -20,6 +21,7 @@ function AppContent() {
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/catalogo/autos" element={<Autos />} />
         <Route path="/catalogo/motos" element={<Motos />} />
+        <Route path="/productos/:id" element={<DetalleProducto/>} />
       </Routes>
       {showLogin && (
         <div className="modal-overlay">

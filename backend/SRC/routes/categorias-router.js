@@ -1,6 +1,6 @@
 import { Router } from "express";
-import {getAllCategoryController,getCategoryByIdController,createCategoryController,updateCategoryController,deleteCategoryController} from "../controllers/categorias-controller.js";
-import {validateCategoryId,validateCreateCategory,validateUpdateCategory,validateDeleteCategory} from "../middlewares/categorias-middleware.js";
+import {getAllCategoryController,getCategoryByIdController,createCategoryController,updateCategoryController,deleteCategoryController} from "../controller/categorias-controller.js";
+import {validateCategoryId,validateCreateCategory,validateUpdateCategory,validateDeleteCategory} from "../middleware/categoria-validator.js";
 import { isAdmin } from "../middleware/roles-validator.js";
 
 const router = Router();
