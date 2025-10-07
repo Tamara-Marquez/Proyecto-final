@@ -1,11 +1,26 @@
 import {getProducts ,getProductsById, createProducts, updateProduct, deleteProduct } from "../model/productos-model.js";
 
+// export const getAllProductsController = async (req, res) => {
+//     try {
+//         const productos = await getProducts();
+//         res.status(200).json(productos);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({
+//             message: "Ocurrió un error al obtener los productos",
+//             error: error.message
+//         });
+//     }
+// };
+
 export const getAllProductsController = async (req, res) => {
     try {
-        const productos = await getProducts();
+        const { search } = req.query;
+        const productos = await getProducts(search);
+        
         res.status(200).json(productos);
     } catch (error) {
-        console.error(error);
+        console.error('Error en getAllProductsController:', error);
         res.status(500).json({
             message: "Ocurrió un error al obtener los productos",
             error: error.message

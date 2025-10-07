@@ -10,13 +10,12 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch productos destacados (últimos 6)
     useEffect(() => {
         const fetchProductos = async () => {
         try {
             const res = await fetch(`${API_URL}/productos`);
             const data = await res.json();
-        // Tomar los últimos 6 productos disponibles
+
             const destacados = data.filter(p => p.estado === 'disponible').slice(-6);
         setProductos(destacados);
     } catch (error) {

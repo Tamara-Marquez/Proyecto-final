@@ -3,31 +3,30 @@ import '../Styles/ProductCard.css';
 import { AddToCartIcon, RemoveFromCartIcon } from '../assets/icon';
 import { useCart } from '../Hooks/useCart.js'
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Cards = ({ categoriaNombre, producto }) => {
 
     const navigate = useNavigate();
 
-const { id_producto, marca, modelo, anio, precio, image, estado } = producto;
-
 const { addToCart, removeFromCart, cart } = useCart();
 
-const inCart = cart.some(item => item.id_producto === id_producto);
+const inCart = cart.some(item => item.id_producto === producto);
 
 return (
     <div className="product-card">
     <img 
-        src={image}
-        alt={`${marca} ${modelo}`} 
+        src={producto.image}
+        alt={`${producto.marca} ${producto.modelo}`} 
         className="product-image" 
     />
     <div className="product-details">
-        <h3 className="product-name">{modelo} {marca}</h3>
-        <p className="product-info">Año: <strong>{anio}</strong></p>
+        <h3 className="product-name">{producto.modelo} {producto.marca}</h3>
+        <p className="product-info">Año: <strong>{producto.anio}</strong></p>
         <p className="product-info">Vehículo: <strong>{categoriaNombre}</strong></p>
-        <p className="product-info">Estado: <strong>{estado}</strong></p>
+        <p className="product-info">Estado: <strong>{producto.estado}</strong></p>
         <div className="product-price">
-        ${precio.toLocaleString('es-AR')}
+        ${producto.precio.toLocaleString('es-AR')}
     </div>
     <div className='container-button'>
         <button className='buy-button'
@@ -38,7 +37,7 @@ return (
         </button>
         <button 
         className='buy-button'
-        onClick={()=> navigate(`/productos/${id_producto}`)} >
+        onClick={()=> navigate(`/productos/${producto.id_producto}`)} >
             Más información
         </button>
         </div>

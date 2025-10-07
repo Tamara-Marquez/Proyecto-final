@@ -1,18 +1,55 @@
 import pool from "../config/bd.js"
 
 
-export const getProducts =  async () => {
-    try {
-        const query = "SELECT * FROM productos";
-        const [rows] = await pool.query (query);
-        return rows; 
-    } catch (error) {
-        console.error("Error al obtener los productos:", error);
-        throw new Error("No se pudieron obtener los productos de la base de datos");
+// export const getProducts =  async () => {
+//     try {
+//         const query = "SELECT * FROM productos";
+//         const [rows] = await pool.query (query);
+//         return rows; 
+//     } catch (error) {
+//         console.error("Error al obtener los productos:", error);
+//         throw new Error("No se pudieron obtener los productos de la base de datos");
         
+//     }
+// };
+export const getProducts = async (search = null) => {
+    try {
+        let query = `
+            SELECT 
+                p.id_producto,
+                p.marca,
+                p.modelo,
+                p.anio,
+                p.precio,
+                p.estado,
+                p.descripcion,
+                p.cantidad,
+                p.image,
+                p.id_categoria,
+                c.nombre as categoria_nombre
+            FROM productos p
+            LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
+            WHERE p.estado = 'disponible'
+        `;
+        
+        const params = [];
+        
+        if (search && search.trim() !== '') {
+            query += ` AND (p.marca LIKE ? OR p.modelo LIKE ?)`;
+            const searchPattern = `%${search}%`;
+            params.push(searchPattern, searchPattern);
+        }
+        
+        query += ` ORDER BY p.id_producto DESC`;
+        
+        const [productos] = await pool.query(query, params);
+        return productos;
+        
+    } catch (error) {
+        console.error('Error en getProducts:', error);
+        throw error;
     }
 };
-
 export const getProductsById = async (id) => {
     try {
         const query = "SELECT * FROM productos WHERE id_producto = ?";

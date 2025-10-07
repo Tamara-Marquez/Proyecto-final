@@ -36,6 +36,13 @@ useEffect(() => {
 
     return (
         <aside className="card details">
+            <div>
+                <img 
+        src={producto.image}
+        alt={`${producto.marca} ${producto.modelo}`} 
+        className="product-image" 
+    />
+            </div>
             <h1 className="title">
                 {producto.marca} {producto.modelo} - {producto.anio}
             </h1>
@@ -81,8 +88,8 @@ useEffect(() => {
 
             {activeTab === "spec" && (
             <div className="tab-panel">
-                <div className="spec"><b>Color</b> {producto.color || "N/A"}</div>
-                <div className="spec"><b>Potencia</b> {producto.potencia || "N/A"}</div>
+                <div className="spec"><b>Color</b></div>
+                <div className="spec"><b>Potencia</b> </div>
             </div>
         )}
         </div>

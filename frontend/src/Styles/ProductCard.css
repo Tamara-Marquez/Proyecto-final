@@ -1,162 +1,3 @@
-/* 
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.filters select,
-.filters input {
-  padding: 8px 12px;
-  font-size: 1em;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-.filters input {
-  width: 200px;
-}
-.catalogo > div {
-  margin-bottom: 40px;
-}
-
-.catalogo h2 {
-  color: #222;
-  margin-bottom: 15px;
-  text-align: left;
-  padding-left: 10px;
-  border-left: 5px solid #1b1e1b;
-}
-
-/ Contenedor de las cards (rejilla) /
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill, 
-    minmax(
-      250px,
-      1fr));
-  gap: 1rem;
-  justify-items: center;
-
-
-}
-
-/ Card de producto /
-.product-card {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 300px;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-}
-
-/ Imagen del producto /
-.product-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/ Detalles del producto /
-.product-details {
-  padding: 15px;
-  text-align: left;
-}
-
-.product-name {
-  font-size: 1.2em;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.product-info {
-  font-size: 0.95em;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.product-price {
-  margin-top: 10px;
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #171515f6;
-}
-
-
-.buy-button {
-  margin-top: 12px;
-  padding: 6px 12px;
-  background-color: #303230;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-
-.filtros {
-  display: flex;
-  gap: 15px;
-  margin: 20px 0;
-  padding: 10px;
-  justify-content: center;
-}
-
-.filtros select {
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background-color: #222;
-  color: #eee;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.filtros select:hover {
-  background-color: #333;
-  border-color: #666;
-}
-
-.filtros select:focus {
-  outline: none;
-  border-color: #999;
-  background-color: #111;
-}
-
-.filtros option {
-  background: #222;
-  color: #eee;
-}
-
-
-/ Responsive para pantallas chicas /
-@media (max-width: 600px) {
-  .cards-container {
-    grid-template-columns: 1fr;
-  }
-
-  .catalogo h2 {
-    font-size: 1.2em;
-  }}
-
- */
-
-
-
 
 /* ========== FILTROS ========== */
 .filters {
@@ -325,8 +166,11 @@
 
 /* ========== IMAGEN DEL PRODUCTO ========== */
 .product-image {
+  /* width: 100%;
+  height: 250px;
+  object-fit: cover; */
   width: 100%;
-  height: 150px;
+  aspect-ratio: 16/9; /* proporción fija */
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -432,6 +276,7 @@
     max-width: 300px;
   }
 }
+
 
 /* ========== DESKTOP LARGE (1025px - 1440px) ========== */
 @media (max-width: 1440px) {
@@ -681,4 +526,216 @@
 
 .product-card.loading {
   animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ========== SEARCH HEADER ========== */
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 24px;
+  padding: 16px 24px;
+  max-width: 900px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  border-left: 4px solid #09f;
+  flex-wrap: wrap;
+  gap: 16px;
+  animation: slideInDown 0.4s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-header h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #222;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.search-header h2:hover {
+  padding-left: 0;
+  border: none;
+}
+
+/* ========== CLEAR SEARCH BUTTON ========== */
+.clear-search-btn {
+  padding: 10px 20px;
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.2);
+}
+
+.clear-search-btn:hover {
+  background: #d63850;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(233, 69, 96, 0.35);
+}
+
+.clear-search-btn:active {
+  transform: translateY(0);
+}
+
+.clear-search-btn:focus-visible {
+  outline: 3px solid #e94560;
+  outline-offset: 2px;
+}
+
+/* ========== NO RESULTS MESSAGE ========== */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease;
+}
+
+.no-results h2 {
+  font-size: 1.6rem;
+  color: #6c757d;
+  margin: 0 0 12px 0;
+  padding: 0;
+  border: none;
+  font-weight: 700;
+}
+
+.no-results h2:hover {
+  padding-left: 0;
+  border: none;
+}
+
+.no-results p {
+  color: #6c757d;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.no-results .clear-search-btn {
+  margin-top: 12px;
+  background: #09f;
+}
+
+.no-results .clear-search-btn:hover {
+  background: #0088dd;
+}
+
+/* ========== CATEGORIA SECTION ========== */
+.categoria-section {
+  margin-bottom: 40px;
+}
+
+.categoria-section h2 {
+  font-size: 1.6rem;
+  color: #222;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  border-left: 4px solid #09f;
+  background: linear-gradient(90deg, rgba(0, 153, 255, 0.08) 0%, transparent 100%);
+  border-radius: 0 8px 8px 0;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.categoria-section h2:hover {
+  padding-left: 20px;
+  border-left-width: 6px;
+}
+
+/* ========== RESPONSIVE - TABLETS ========== */
+@media (max-width: 768px) {
+  .search-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 20px;
+    margin: 0 20px 24px;
+  }
+  
+  .search-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .clear-search-btn {
+    width: 100%;
+    padding: 12px;
+  }
+  
+  .no-results {
+    padding: 50px 20px;
+    margin: 30px 20px;
+  }
+  
+  .categoria-section h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* ========== RESPONSIVE - MOBILE ========== */
+@media (max-width: 480px) {
+  .search-header {
+    padding: 14px 16px;
+    margin: 0 16px 20px;
+  }
+  
+  .search-header h2 {
+    font-size: 1rem;
+  }
+  
+  .clear-search-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  
+  .no-results {
+    padding: 40px 16px;
+    margin: 24px 16px;
+  }
+  
+  .no-results h2 {
+    font-size: 1.3rem;
+  }
+  
+  .categoria-section h2 {
+    font-size: 1.3rem;
+    padding: 8px 12px;
+  }
+}
+
+/* ========== ACCESIBILIDAD ========== */
+@media (prefers-reduced-motion: reduce) {
+  .search-header,
+  .clear-search-btn,
+  .categoria-section h2 {
+    transition: none;
+  }
+
+  @keyframes slideInDown {
+    from, to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .clear-search-btn:hover {
+    transform: none;
+  }
 }
