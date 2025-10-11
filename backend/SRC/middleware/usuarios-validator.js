@@ -47,7 +47,7 @@ const valUserById= [
 
 const valUpdataUser = [
     param("id").isInt().withMessage("El ID del usuario debe ser un número entero"),
-     check("nombre")
+    check("nombre")
     .isString().withMessage("El nombre debe ser texto, no incluir caracteres")
     .notEmpty().withMessage("El nombre es un campo obligatorio"), 
 

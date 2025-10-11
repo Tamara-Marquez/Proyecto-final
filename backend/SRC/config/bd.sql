@@ -65,7 +65,7 @@ INSERT INTO Rol (id_rol, nombre_rol) VALUES
 
 INSERT INTO Usuarios (nombre, apellido, email, password, id_rol) VALUES
 ('Tamara', 'Marquez', 'tamaramarquez@gmail.com', '290521', 1),
-('Hernan', 'Nahirñak', 'nahirñakhernan@gmail.com', '061097', 2),
+('Hernan', 'Nahirñak', 'nahirnakhernan@gmail.com', '061097', 2),
 ('Maximiliano', 'Torres', 'maxitorres@gmail.com', 'maxi5886', 2),
 ('Javier', 'Ramirez', 'ramirezjavier@gmail.com', '5546ramirez', 2),
 ('Carlos', 'López', 'carloslopez@gmail.com', '84512151', 2);

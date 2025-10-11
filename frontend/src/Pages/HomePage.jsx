@@ -164,9 +164,9 @@ const Home = () => {
             </button>
             <button 
                 className="cta-btn secondary"
-                onClick={() => navigate('/ayuda')}
+                onClick={() => navigate('/contacto')}
             >
-                Contactanos
+                Contáctanos
             </button>
         </div>
         </div>

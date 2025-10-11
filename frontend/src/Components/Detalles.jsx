@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from '../Hooks/useCart.js';
 import "../Styles/DetalleProducto.css";
 import { API_URL } from "../Config/api.js";
@@ -11,7 +11,11 @@ const DetalleProducto = () => {
     const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState("desc");
     const { addToCart } = useCart();
+    const navigate = useNavigate();
 
+    const handeClick = () => {
+        navigate(-1);
+    }
 
 useEffect(() => {
     const fetchProducto = async () => {
@@ -36,7 +40,7 @@ useEffect(() => {
 
     return (
         <aside className="card details">
-            <div>
+            <div className="img-datails">
                 <img 
         src={producto.image}
         alt={`${producto.marca} ${producto.modelo}`} 
@@ -75,7 +79,7 @@ useEffect(() => {
             className={activeTab === "spec" ? "active" : ""}
             onClick={() => setActiveTab("spec")}
         >
-            Especificaciones
+            Métodos de pago
         </button>
         </div>
 
@@ -86,13 +90,35 @@ useEffect(() => {
             </div>
         )}
 
-            {activeTab === "spec" && (
+        {activeTab === "spec" && (
             <div className="tab-panel">
-                <div className="spec"><b>Color</b></div>
-                <div className="spec"><b>Potencia</b> </div>
+                <div className="spec">
+                <b>Tarjetas de crédito y débito:</b> Aceptamos Visa, Mastercard, American Express y otras tarjetas nacionales e internacionales.
             </div>
-        )}
+
+        <div className="spec">
+            <b>Transferencia bancaria:</b> Podés realizar el pago mediante transferencia o depósito directo a nuestra cuenta. Los datos se enviarán al confirmar la compra.
         </div>
+
+        <div className="spec">
+            <b>Mercado Pago:</b> Pagá de forma rápida y segura con tu cuenta de Mercado Pago, incluyendo cuotas sin interés según promociones vigentes.
+        </div>
+
+        <div className="spec">
+            <b>Efectivo o retiro en tienda:</b> Si preferís, podés abonar en efectivo al retirar el producto en nuestro local (previa coordinación).
+        </div>
+
+        <div className="spec">
+            <b>Financiación:</b> Ofrecemos planes en cuotas fijas con distintas tarjetas, según las promociones disponibles al momento de la compra.
+        </div>
+    </div>
+)}
+        </div>
+    </div>
+    <div className="btn-atras">
+        <button className="btn ghost" onClick={handeClick}>
+            Volver
+        </button>
     </div>
     </aside>
 );

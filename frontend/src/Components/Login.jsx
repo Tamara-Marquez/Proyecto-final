@@ -3,28 +3,48 @@ import { useState } from "react";
 import React from 'react'
 import '../Styles/Login.css'
 import { useModal } from "../Context/ModalContext";
-
+import {login} from '../Config/login.js'
 
 export default function Login() {
-        const [email,setEmail]= useState("");
-        const [password, setPassword] = useState ("");
+
+    const [values, setValues] = useState ({
+        email: "",
+        password: "",
+    });
+
+    const handleLoginChange = (e)=> {
+        const {name, value} = e.target
+        setValues ( {
+            ...values,
+            [name]: value,
+        });
+    };
+        
         const [error, setError] = useState ("");
 
         const {closeLogin, openRegister}= useModal();
 
-        const handleSubmit = (e) => {
+        const handleSubmit = async (e) => {
+
             e.preventDefault();
+
+            const { email, password } = values;
+
             if (email === "" || password === "") { 
                 setError ("Usuario o contraseña incorrecta.")
+                return;
             }
-            else {
-                setError ("");
-                console.log ("Iniciando sesión con:" , {email, password});
-                closeLogin();
-            }
+            try {
+        const response = await login(email, password);
+
+        console.log("Inicio de sesión exitoso:", response);
+
+        closeLogin();
+    } catch (error) {
+        setError("Error al iniciar sesión. Verificá tus datos.");
+    }
         };
 
-    
     return (
         <section className="welcome-container">
             <h2> Iniciar Sesión </h2>
@@ -34,17 +54,19 @@ export default function Login() {
                     <label > Correo electrónico</label>
                     <input 
                     type="email" 
+                    name="email"
                     placeholder="tucorreo@gmail.com" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)} />
+                    value={values.email}
+                    onChange={handleLoginChange} />
                 </div>
         <div className="form-group" >
                     <label > Contraseña </label>
                     <input 
                     type="password" 
+                    name="password"
                     placeholder="Tu contraseña" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} />
+                    value={values.password}
+                    onChange={handleLoginChange} />
                 </div>
                 <button type="submit" className='back-btn'> Acceder </button>
                 <button className='back-btn' onClick={openRegister}> Registrarse </button>

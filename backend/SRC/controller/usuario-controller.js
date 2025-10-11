@@ -16,7 +16,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
     try {
-        const user = await getUsersById (req.param.id);
+        const user = await getUsersById (req.params.id);
         if (!user) {
         return res.status (404).json({menssage: "No se encuentra el usuario con ese ID"});
     }
@@ -31,23 +31,25 @@ const getById = async (req, res) => {
 const registerUser = async (req, res) =>{
     try {
         const {nombre, apellido, email, password, id_rol}= req.body; 
-        if (!nombre || !apellido || !email || !password ||id_rol) {
+
+        if (!nombre || !apellido || !email || !password ||!id_rol) {
     return res.status(400).json({ message: "Todos los campos son obligatorios" });
     };
     
-    const mail = String(email).toLowerCase().trim();
-    const existingUser = await findUserByEmail(email);
+        const emailNormalized = email.toLowerCase().trim();
+        const existingUser = await findUserByEmail(emailNormalized);
 
     if (existingUser) {
     return res.status(409).json({ message: "El email del usuario ya existe" });
     };
 
-    const hashedPass = await bcrypt.hash(pass, 10);
+
     const newUser= await createUser ({
         nombre,
         apellido,
-        email,
-        password: hashedPass
+        email: emailNormalized,
+        password,
+        id_rol
     });
 
     res.status(201).json({
@@ -61,44 +63,101 @@ const registerUser = async (req, res) =>{
 
 const login = async (req, res) => {
     
-    const SECRET_KEY = process.env.SECRET_KEY;
-    const expiresIn = process.env.TOKEN_EXPIRATION || '600s';
+//     const {email, password} = req.body
 
-    if (!SECRET_KEY) {
-        return res.status(500).json({ message: "Falta la clave"});
-    };
+//     const SECRET_KEY = process.env.SECRET_KEY;
+//     const expiresIn = process.env.TOKEN_EXPIRATION || '600s';
 
-    try {
-        const {email, password} = req.body
-        if (!email || !password) {
-            return res.status (400).json({message : "El email y contraseñas son obligatorios"});
-        }
+//     if (!SECRET_KEY) {
+//         return res.status(500).json({ message: "Falta la clave"});
+//     };
 
-    const userFromDB= await findUserByEmail(email);
-        if (!userFromDB){
-            return res.status(401).json({message: "Email incorrecto"})
-        }
+//     const emailNormalized = email.toLowerCase().trim();
+// console.log("Buscando usuario con email:", emailNormalized);
+// const userFromDB = await findUserByEmail(emailNormalized);
+// console.log("Usuario encontrado:", userFromDB);
 
-    const ok = await bcrypt.compare(password, existingUser.password);
-    if (!ok){
-        return res.status(401).json({ message: "Contraseña incorrecta"});
-    }
+//     try {
+        
+//         if (!email || !password) {
+//             return res.status (400).json({message : "El email y contraseñas son obligatorios"});
+//         }
 
-    const payload = {
-        nombre: userFromDB.nombre,
-        apellido: userFromDB.apellido,
-        email: userFromDB.email,
-        id: userFromDB.id_rol
-    };
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn });
+//         const userFromDB = await findUserByEmail(email.toLowerCase().trim());
+//         console.log("Usuario encontrado:", userFromDB);
+//         if (!userFromDB){
+//             return res.status(401).json({message: "Email incorrecto"})
+//         }
+
+
+//     const ok = await bcrypt.compare(password, userFromDB.password);
+//         if (!ok){
+//             return res.status(401).json({ message: "Contraseña incorrecta" });
+//         }
+
+//     const payload = {
+//         nombre: userFromDB.nombre,
+//         apellido: userFromDB.apellido,
+//         email: userFromDB.email,
+//         id: userFromDB.id_rol
+//     };
+//     const token = jwt.sign(payload, SECRET_KEY, { expiresIn });
     
-    return res.status(200).json({ user: payload, token });
-}catch(error) {
-    return res.status(error.status || 500).json({ message: error.message || 'Error en el servidor' });
+//     return res.status(200).json({ user: payload, token });
+// }catch(error) {
+//     return res.status(error.status || 500).json({ message: error.message || 'Error en el servidor' });
 
-}};
+// }};
+try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ message: "El email y contraseña son obligatorios" });
+        }
 
+        const emailNormalized = email.toLowerCase().trim();
+        console.log(" Buscando email:", emailNormalized);
 
+        const userFromDB = await findUserByEmail(emailNormalized);
+        console.log(" Usuario encontrado:", userFromDB ? "SÍ" : "NO");
+        
+        if (!userFromDB) {
+            console.log(" Email no encontrado en BD");
+            return res.status(401).json({ message: "Email incorrecto" });
+        }
+
+        console.log("Password ingresado:", password);
+        console.log("Hash en BD:", userFromDB.password);
+
+        const ok = await bcrypt.compare(password, userFromDB.password);
+        if (!ok) {
+            return res.status(401).json({ message: "Contraseña incorrecta" });
+        }
+
+        
+        const token = jwt.sign (
+            {
+            id_usuario: userFromDB.id_usuario,
+            nombre: userFromDB.nombre,
+            apellido: userFromDB.apellido,
+            email: userFromDB.email,
+            id_rol: userFromDB.id_rol
+        },
+        process.env.SECRET_KEY,
+        {
+        expiresIn: process.env.TOKEN_EXPIRATION,
+    }
+    );
+    console.log("🎉 Login exitoso");
+
+    res
+    .status(200)
+    .json({ usuario: userFromDB.nombre + userFromDB.apellido, token: token });
+
+    } catch (error) {
+        console.error("Error en loginUser:", error);
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 
 
