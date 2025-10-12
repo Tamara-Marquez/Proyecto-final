@@ -367,8 +367,8 @@
     }
 
     .cart-button {
-        top: 87px;
-        right: 13px;
+        right: 16px;
+        bottom: 95px;
     }
 
     .cart-counter {
@@ -403,7 +403,7 @@
     }
 
     .cart-button {
-        top: 87px;
+        bottom: 20px;
         right: 13px;
     }
 }

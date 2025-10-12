@@ -1,5 +1,5 @@
 
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, Form} from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
@@ -10,6 +10,7 @@ import Motos from './Components/Motos';
 import  Contact  from './Components/Contac';
 import DetalleProducto from "./Components/Detalles";
 import { useModal, ModalProvider } from "./Context/ModalContext";
+import {AuthProvider} from "./Context/auth";
 
 function AppContent() {
   const {showLogin, closeLogin, showRegister, closeRegister} = useModal();
@@ -49,8 +50,10 @@ function AppContent() {
 
 export default function App () {
   return (
+        <AuthProvider>
         <ModalProvider>
           <AppContent></AppContent>
         </ModalProvider>
+        </AuthProvider>
   )
 }

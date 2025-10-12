@@ -1,5 +1,5 @@
-import React from "react";  
 import { API_URL } from "../Config/api.js";
+import {jwtDecode} from 'jwt-decode';
 
 export async function login(email, password) {
 
@@ -9,6 +9,7 @@ export async function login(email, password) {
     };
 
     console.log("Enviando a login:", datosUsuarios);
+    
     try {
         const parametros = {
             method : "POST",
@@ -17,16 +18,32 @@ export async function login(email, password) {
         }; 
 
         const res = await fetch(`${API_URL}/usuario/login`, parametros);
-
+        const body = await res.json();
+        console.log("Respuesta del servidor:", body);
+        
         if (!res.ok) {
-            throw new Error("Error al obtener el usuario");
+            throw new Error(body.message || "Error al iniciar sesión");
         }
 
-    const body = await res.json();
-    console.log("Respuesta del servidor:", body);
-    return body;
+        if (!body.token) {
+            throw new Error("Token no recibido desde el servidor");
+        }
 
-} catch (error) {
+        localStorage.setItem("token", body.token);
+
+        const decoded = jwtDecode(body.token);
+        console.log("Rol decodificado:", decoded.id_rol);
+
+        if (decoded.id_rol) {
+            localStorage.setItem("rol", decoded.id_rol);
+        };
+        return {
+            token: body.token,
+            usuario: body.usuario || null,
+            decoded: decoded
+        };
+
+    } catch (error) {
     console.error("Error en el fetch:", error.message);
     throw error;
 }

@@ -491,13 +491,41 @@
 
     /* Login button en movil */
     .nav_item-login {
-        border-bottom: none;
-        margin-top: auto;
-        padding: 16px 24px;
+        border-bottom: 1px solid #2a2a2a; 
+        margin-top: 0; 
+        padding: 0
     }
 
-    .nav_item-login button {
-        border-radius: 8px;
+    .nav_item-login > button {
+        width: 100%;
+        padding: 16px 24px;
+        border-radius: 0;
+        justify-content: flex-start;
+    }
+    
+    .nav_item-login .sub_nav {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav_item-login .sub_nav::before {
+        display: none;
+    }
+
+    .nav_item-login .sub_nav li {
+        padding: 0;
+    }
+
+    .nav_item-login .sub_nav a,
+    .nav_item-login .sub_nav button {
+        padding: 14px 24px 14px 44px;
+        background-color: #252525;
+        display: block;
+        width: 100%;
+        text-align: left;
     }
 
     /* Logo más pequeño */
@@ -609,4 +637,125 @@
     .nav::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+}
+
+/* ========== NAV PROFILE (usuario logueado) ========== */
+.nav-profile {
+    position: relative;
+}
+
+.nav-profile button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    background: #2a2a2a;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-profile button:hover {
+    background-color: #3a3a3a;
+    color: #09f;
+    transform: translateY(-2px);
+}
+
+/* Submenú del perfil */
+.sub_nav-profile {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #2a2a2a;
+    min-width: 180px;
+    border-radius: 8px;
+    padding: 8px 0;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    z-index: 200;
+    animation: slideDown 0.3s ease;
+}
+
+.sub_nav-profile.active {
+    display: flex;
+}
+
+.sub_nav-profile li {
+    padding: 10px 20px;
+}
+
+.sub_nav-profile li button,
+.sub_nav-profile li a {
+    color: #f5f5f5;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.sub_nav-profile li button:hover,
+.sub_nav-profile li a:hover {
+    background-color: #3a3a3a;
+    color: #09f;
+}
+
+/* Arrow del perfil */
+.nav-profile .arrow {
+    font-size: 0.7rem;
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.nav-profile.active .arrow {
+    transform: rotate(180deg);
+}
+/* Submenú del perfil en móvil */
+.nav-profile {
+    width: 100%;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.nav-profile button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 16px 24px;
+    border-radius: 0;
+}
+
+.sub_nav-profile {
+    position: relative;
+    top: 0;
+    right: 0;
+    box-shadow: none;
+    border-radius: 0;
+    display: none;
+}
+
+.sub_nav-profile.active {
+    display: flex;
+}
+
+.sub_nav-profile li {
+    padding: 12px 24px 12px 40px;
+}
+/* Dropdown de perfil */
+.nav_item-login .sub_nav button {
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+.nav_item-login .sub_nav button:hover {
+    background-color: #3a3a3a;
+    color: #09f;
 }

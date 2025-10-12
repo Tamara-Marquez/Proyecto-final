@@ -2,16 +2,31 @@ import '../Styles/Cart.css';
 import { useId, useState, useEffect } from 'react'
 import { CartIcon, ClearCartIcon } from '../assets/icon.jsx'
 import { useCart } from '../Hooks/useCart.js'
+import { useAuth } from '../Context/auth.jsx';
+import { useModal } from '../Context/ModalContext.jsx';
 
-function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_producto }) {
+function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_producto}) {
     const { decrementItem, removeFromCart,  } = useCart()
-        const handleDecrement = () => {
+    const {isLoggedIn} = useAuth();
+    const {openLogin} = useModal();
+
+    const producto = { image, precio, marca, modelo, cantidad, id_producto };
+
+    const handleDecrement = () => {
             if (cantidad === 1) {
                 removeFromCart({ id_producto })
         }   else {
                 decrementItem({ id_producto })
         }
-    }
+    };
+
+    const handleAdd = () => {
+        if (isLoggedIn) {
+            addToCart ({...producto, cantidad:1});
+        } else {
+            openLogin();
+        }
+    };
 
     return (
     <li>
@@ -27,7 +42,7 @@ function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_produ
                 <div className="quantity-controls">
                     <button onClick={handleDecrement}>-</button>
                     <small className='quantity'>Cantidad: {cantidad}</small>
-                    <button onClick={addToCart}>+</button>
+                    <button onClick={handleAdd}>+</button>
                 </div>
                 <small className="subtotal">
                     Subtotal: ${(precio * cantidad).toLocaleString('es-AR')}
@@ -38,33 +53,38 @@ function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_produ
     </footer>
     </li>
 )
-}
+};
 
 export function Cart () {
     const cartCheckboxId = useId()
     const { cart, clearCart, addToCart, removeFromCart } = useCart()
     const [isOpen, setIsOpen] = useState(false)
     const [prevCartLength, setPrevCartLength] = useState(0)
+    const {isLoggedIn} = useAuth();
+    const {openLogin} = useModal();
 
     const totalItems = cart.reduce((total, item) => total + item.cantidad, 0)
     const totalPrice = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0)
 
+    const handleAdd = () => {
+        if (isLoggedIn) {
+            addToCart ({...producto, cantidad:1});
+        } else {
+            openLogin();
+        }
+    };
 
-    // Efecto para abrir el carrito automáticamente cuando se agrega un producto
     useEffect(() => {
         if (cart.length > prevCartLength) {
-            // Se agregó un producto, abrir el carrito
             setIsOpen(true)
-            
-            // Opcional: cerrar automáticamente después de 3 segundos
             const timer = setTimeout(() => {
                 setIsOpen(false)
             }, 3000)
             
             return () => clearTimeout(timer)
         }
-        setPrevCartLength(cart.length)
-    }, [cart.length, prevCartLength])
+        setPrevCartLength(cart.length);
+    }, [cart.length, prevCartLength]);
 
 
     return (
@@ -90,7 +110,7 @@ export function Cart () {
                     cart.map(producto => (
                         <CartItem
                             key={producto.id_producto}
-                                addToCart={() => addToCart(producto)}
+                                addToCart={handleAdd}
                                 removeFromCart={removeFromCart} 
                                 {...producto}
                         />

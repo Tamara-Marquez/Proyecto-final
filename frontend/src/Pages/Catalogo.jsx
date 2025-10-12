@@ -111,7 +111,6 @@ const Catalogo = () => {
 
   return (
     <div className="catalogo">
-      {/* Header con búsqueda */}
       {searchTerm ? (
         <div className="search-header">
           <h2>🔍 Resultados para: "{searchTerm}"</h2>
@@ -123,13 +122,11 @@ const Catalogo = () => {
         <h2>Todos nuestros vehículos disponibles</h2>
       )}
 
-      {/* Filtros */}
       <Filtros productos={todosProductos} onFiltrar={handleFiltrar} />
 
-      {/* Sin resultados */}
       {productosFiltrados.length === 0 ? (
         <div className="no-results">
-          <h2>😔 No se encontraron vehículos</h2>
+          <h2> No se encontraron vehículos</h2>
           <p>Intentá con otros filtros o realizá una nueva búsqueda</p>
           {searchTerm && (
             <button className="clear-search-btn" onClick={limpiarBusqueda}>
@@ -138,7 +135,6 @@ const Catalogo = () => {
           )}
         </div>
       ) : (
-        // Mostrar productos agrupados por categoría
         Object.values(productosPorCategoria).map((categoria) => (
           <div key={categoria.id_categoria} className="categoria-section">
             <h2>{categoria.nombre.toUpperCase()} ({categoria.productos.length})</h2>

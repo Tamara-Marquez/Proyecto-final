@@ -739,3 +739,11 @@
     transform: none;
   }
 }
+
+.product-card.admin-card {
+    border: 2px solid #09f;
+}
+
+.product-card.admin-card .buy-button {
+    background: linear-gradient(135deg, #09f 0%, #0af 100%);
+}
