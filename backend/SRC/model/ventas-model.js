@@ -3,7 +3,7 @@ import pool  from "../config/bd.js";
 
 export const getVentas = async () => {
   const query = `
-    SELECT v.id_venta, v.fecha, v.total,
+    SELECT v.id_venta, v.total,
           u.nombre AS cliente_nombre, u.apellido AS cliente_apellido, u.email AS cliente_email,
           p.marca, p.modelo, p.anio, p.precio AS precio_producto
     FROM ventas v
@@ -18,7 +18,7 @@ export const getVentas = async () => {
 
 export const getVentaById = async (id) => {
   const query = `
-    SELECT v.id_venta, v.fecha, v.total,
+    SELECT v.id_venta,  v.total,
           u.nombre AS cliente_nombre, u.apellido AS cliente_apellido, u.email AS cliente_email,
           p.marca, p.modelo, p.anio, p.precio AS precio_producto
     FROM ventas v
@@ -33,7 +33,7 @@ export const getVentaById = async (id) => {
 
 export const getVentasPorCliente = async (idUsuario) => {
   const query = `
-    SELECT v.id_venta, v.fecha, v.total,
+    SELECT v.id_venta, v.total,
           p.marca, p.modelo, p.anio
     FROM ventas v
     LEFT JOIN productos p ON v.id_producto = p.id_producto

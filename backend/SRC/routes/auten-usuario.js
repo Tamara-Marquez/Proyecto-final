@@ -5,7 +5,7 @@ import {valCreateUser} from "../middleware/usuarios-validator.js"
 
 const router = Router ();
 
-router.post('/usuario',valCreateUser, registerUser);
+router.post('/usuario/registro',valCreateUser, registerUser);
 router.post('/usuario/login',login);
 
 export default router;

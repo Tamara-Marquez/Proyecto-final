@@ -344,11 +344,3 @@ VALUES
     'https://motos0km.com.ar/models/bajaj-rouser-as-200-gallery-0000ff-120181103224218.jpg'
 );
 
-DELETE FROM Productos
-WHERE marca = 'Rouser'
-  AND modelo = 'RS 200'
-  AND anio = 2021;
-
-
-
-SHOW DATABASES;

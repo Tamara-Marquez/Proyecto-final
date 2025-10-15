@@ -28,7 +28,7 @@ const valRoleById = [
 ];
 
 const isAdmin = (req, res, next) => {
-    if (req.user && req.user.id_rol === 1) { 
+    if (req.user && req.user.id_rol == 1) { 
         next();
     } else {
         return res.status(403).json({ message: "No tienes permisos de administrador" });

@@ -4,7 +4,7 @@ import React from 'react'
 import '../Styles/Login.css'
 import { useModal } from "../Context/ModalContext";
 import { useAuth } from "../Context/auth.jsx";
-import {login} from '../Config/login.js'
+import {login} from '../Config/fetch-login.js'
 
 export default function Login() {
 
@@ -26,26 +26,22 @@ export default function Login() {
         if (error) setError("");
     };
 
-        const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const { email, password } = values;
+        const { email, password } = values;
 
-            if (email === "" || password === "") { 
-                setError ("Usuario o contraseña incorrecta.")
-                return;
+        if (email === "" || password === "") { 
+            setError ("Usuario o contraseña incorrecta.")
+            return;
             }
-
             setLoading(true);
-
-            try {
-        const response = await login(email, password);
-
-        console.log("Inicio de sesión exitoso:", response);
-        loginUser(response.token, response.decoded);
-
-        closeLogin();
+        try {
+            const response = await login(email, password);
+            console.log("Inicio de sesión exitoso:", response);
+            loginUser(response.token, response.decoded);
+            closeLogin();
 
     } catch (error) {
         setError("Error al iniciar sesión. Verificá tus datos.");
@@ -68,8 +64,7 @@ export default function Login() {
                     name="email"
                     placeholder="tucorreo@gmail.com" 
                     value={values.email}
-                    onChange={handleLoginChange} 
-                    disabled={loading}
+                    onChange={handleLoginChange}
                     />
                 </div>
             <div className="form-group" >
@@ -80,7 +75,7 @@ export default function Login() {
                     placeholder="Tu contraseña" 
                     value={values.password}
                     onChange={handleLoginChange}
-                    disabled={loading}/>
+                    />
                 </div>
                 <button 
                 type="submit" 

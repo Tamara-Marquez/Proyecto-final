@@ -76,20 +76,27 @@ const valUpdataUser = [
 ];
 
 const isAutenticated = (req, res, next) => {
-    const authHeader = req.headers["authorization"]; 
-    if (!authHeader) {
-        return res.status(403).json({ message: "No tienes token de autorización." });
-}
-    try {
-    const token = authHeader.split(" ")[1];
+    if (req.headers["authorization"]) {
+        try {
+            const token = req.headers["authorization"];
 
-    const secretKey = process.env.SECRET_KEY;
-    const verified = jwt.verify(token, secretKey);
-    req.user = verified; 
-    next();
-} catch (error) {
-    res.status(403).json({ message: "Token inválido o expirado.", error: error.message });
+            const claveSecreta = process.env.SECRET_KEY
+            const verified = jwt.verify(token, claveSecreta);
+        if (verified) {
+        next();
+    } else {
+        res.status(403).json({ message: "token invalido" });
+    }
+    } catch (error) {
+        res.status(403).json({ message: error.message });
+    }
+    } else {
+        return res
+        .status(403)
+        .json({ message: "No tienes token de autenticación, vuelve a loguear" });
 }
 };
+
+
 
 export { valCreateUser, valUserById, valUpdataUser, isAutenticated};

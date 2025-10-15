@@ -73,7 +73,7 @@ export const createProducts = async (producto) => {
         const [result] = await pool.query(query, [
             marca, modelo, anio, precio, descripcion, id_categoria, id_usuario
         ]);
-        const [rows] = await pool.query("SELECT * FROM productos WHERE id = ?", [result.insertId]);
+        const [rows] = await pool.query("SELECT * FROM productos WHERE id_producto = ?", [result.insertId]);
         return rows[0];
     } catch (error) {
         console.error("Error al crear un producto:", error.message);
@@ -87,14 +87,14 @@ export const updateProduct = async (id, producto) => {
         const query = `
             UPDATE productos 
             SET marca = ?, modelo = ?, anio = ?, precio = ?, descripcion = ?, id_categoria = ?, id_usuario = ?
-            WHERE id = ? `;
+            WHERE id_producto = ? `;
         const [result] = await pool.query(query, [
             marca, modelo, anio, precio, descripcion, id_categoria, id_usuario, id
         ]);
         if (result.affectedRows === 0) {
             throw new Error("Producto no encontrado");
         }
-        const [rows] = await pool.query("SELECT * FROM productos WHERE id = ?", [id]);
+        const [rows] = await pool.query("SELECT * FROM productos WHERE id_producto = ?", [id]);
         return rows[0];
     } catch (error) {
         console.error("Error al actualizar producto:", error.message);
@@ -104,7 +104,7 @@ export const updateProduct = async (id, producto) => {
 
 export const deleteProduct = async (id) => {
     try {
-        const [result] = await pool.query("DELETE FROM productos WHERE id = ?", [id]);
+        const [result] = await pool.query("DELETE FROM productos WHERE id_producto= ?", [id]);
         if (result.affectedRows === 0) {
             throw new Error("Producto no encontrado");
         }

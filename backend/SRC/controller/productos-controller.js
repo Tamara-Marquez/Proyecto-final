@@ -76,6 +76,9 @@ export const updateProductController = async (req, res) => {
 };
 
 export const deleteProductController = async (req, res) => {
+    console.log("📍 req.params:", req.params);
+    console.log("📍 req.params.id:", req.params.id);
+    console.log("📍 Tipo:", typeof req.params.id);
     try {
         const { id } = req.params;
         const resultado = await deleteProduct(id);

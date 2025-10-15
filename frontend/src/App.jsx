@@ -11,7 +11,7 @@ import  Contact  from './Components/Contac';
 import DetalleProducto from "./Components/Detalles";
 import { useModal, ModalProvider } from "./Context/ModalContext";
 import {AuthProvider} from "./Context/auth";
-
+import './Styles/App.css'
 function AppContent() {
   const {showLogin, closeLogin, showRegister, closeRegister} = useModal();
 

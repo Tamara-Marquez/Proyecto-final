@@ -92,7 +92,7 @@ return (
         ) : (
             <>
                 <button onClick={toggleProfile}>
-                    {user?.id_rol === 1 ? "Administrador" : "Usuario"} ▼
+                    👤 {user?.id_rol === 1 ? "Admin" : user?.nombre?.split(' ')[0] || "Usuario"} ▼
                 </button>
 
             <ul className={`sub_nav ${isProfileOpen ? "active" : ""}`}>

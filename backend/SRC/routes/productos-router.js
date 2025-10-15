@@ -11,6 +11,6 @@ router.get('/productos', getAllProductsController);
 router.get('/productos/:id', validateId, getProductByIdController); 
 router.post('/productos', isAutenticated,isAdmin, validateCreateProduct, createProductController);
 router.put('/productos/:id', isAutenticated,isAdmin, validateUpdateProduct, updateProductController);
-router.delete('/productos/:id', isAutenticated,isAdmin, validateDeleteProduct, deleteProductController);
+router.delete('/productos/:id', validateDeleteProduct, deleteProductController);
 
 export default router;

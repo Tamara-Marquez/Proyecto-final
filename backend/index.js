@@ -41,22 +41,4 @@ app.listen(process.env.APP_PORT, () => {
 });
 
 
-// startServer(process.env.APP_PORT);
-
-// function startServer(puerto) {
-//   const server = app.listen(puerto, () => {
-//     console.log(`Servidor escuchando en: http://localhost:${puerto}`);
-//   });
-
-//   server.on('error', (err) => {
-//     if (err.code === 'EADDRINUSE') {
-//       console.log(`Puerto ${puerto} en uso, intentando con el puerto ${puerto + 1}...`);
-//       puerto++;
-//       startServer(puerto); 
-//     } else {
-//       console.error("Error al iniciar el servidor:", err);
-//     }
-//   });
-// }
-
 

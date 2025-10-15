@@ -1,4 +1,4 @@
-import { API_URL } from "../Config/api.js";
+import { API_URL } from "./api.js";
 import {jwtDecode} from 'jwt-decode';
 
 export async function login(email, password) {
@@ -49,3 +49,33 @@ export async function login(email, password) {
 }
 };
 
+
+export async function register(nombre, apellido,email, password) {
+
+    const datosUsuarios = {
+        nombre,
+        apellido,
+        email,
+        password,
+        id_rol: 2
+    }
+
+    try {
+
+        const parametros = {
+            method : "POST",
+            headers : {"Content-Type": "application/json"},
+            body: JSON.stringify(datosUsuarios)
+        }
+        const res = await fetch(`${API_URL}/usuario/registro`, parametros);
+        const body = await res.json();
+        console.log("Respuesta del servidor:", body);
+        if (!res.ok) {
+            throw new Error(body.message || "Error al registrar el Usuario");
+        }
+        return body;
+    } catch (error) {
+        console.error("Error en el fetch:", error.message);
+    throw error;
+    }
+};
