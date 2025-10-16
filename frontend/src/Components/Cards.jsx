@@ -4,6 +4,10 @@ import { AddToCartIcon, RemoveFromCartIcon } from '../assets/icon';
 import { useCart } from '../Hooks/useCart.js'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/auth';
+import { useFavorites } from '../Context/favorite.jsx';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+
+
 
 const Cards = ({ categoriaNombre, producto }) => {
 
@@ -11,9 +15,23 @@ const Cards = ({ categoriaNombre, producto }) => {
 
     const { addToCart, removeFromCart, cart } = useCart();
 
-    const inCart = cart.some(item => item.id_producto === producto);
+    const inCart = cart.some(item => item.id_producto === producto.id_producto);
 
     const { user }= useAuth(); 
+
+    const {favoritos, 
+        addToFavorite, 
+        removeFromFavorite} = useFavorites();
+
+    const isFavorite = favoritos.some(item => item.id_producto=== producto.id_producto);
+
+    const toggleFavorite =()=>{
+        if(isFavorite) {
+            removeFromFavorite (producto.id_producto);
+        } else {
+            addToFavorite (producto);
+        }
+    };
 
     const ProductInfo = ()=> (
     <>
@@ -59,6 +77,17 @@ const Cards = ({ categoriaNombre, producto }) => {
                     >
                         Más información
                     </button>
+                            <button 
+                                className={`buy-button ${isFavorite ? "active" : ""}`}
+                                style={{ 
+                                    backgroundColor: isFavorite
+                                    ? "rgba(201, 20, 20, 0.89)"
+                                    : "rgba(149, 155, 157, 1)"
+                                }}
+                                onClick={toggleFavorite}
+                            >
+                                {isFavorite ? <FaHeart color="white" /> : <FaRegHeart color="white" />}
+                            </button>
                 </div>
             </div>
         );

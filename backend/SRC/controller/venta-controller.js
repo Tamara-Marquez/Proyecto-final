@@ -1,5 +1,5 @@
 import pool from "../config/bd.js";
-import { getVentas, getVentaById, getVentasPorCliente, getTotalDeVentas, getProductoMasVendido, getVentasPorFecha, createVenta, updateVenta, deleteVenta} from "../model/ventas-model.js";
+import { getVentas, getVentaById, getVentasPorCliente, getTotalDeVentas, getProductoMasVendido, createVenta, updateVenta, deleteVenta} from "../model/ventas-model.js";
 
 export const obtenerVentas = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ export const obtenerVentaPorId = async (req, res) => {
   try {
     const { id } = req.params;
     const [rows] = await pool.query("SELECT * FROM ventas WHERE id_venta = ?", [id]);
-    if (rows.length === 0) return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
+    if (rows.length === 0) return res.status(404).json({ message: `No se encontró la venta con id ${id} `});
 
     const venta = await getVentaById(id);
     res.status(200).json(venta);
@@ -31,7 +31,7 @@ export const obtenerVentasPorCliente = async (req, res) => {
 
     if (!id) return res.status(400).json({ mensaje: "id_usuario es obligatorio" });
     const [usuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id]);
-    if (usuario.length === 0) return res.status(404).json({ mensaje: `No existe el usuario con id ${id}` });
+    if (usuario.length === 0) return res.status(404).json({ mensaje:` No existe el usuario con id ${id}` });
 
     const ventas = await getVentasPorCliente(id);
     res.status(200).json(ventas);
@@ -63,31 +63,59 @@ export const obtenerProductoMasVendido = async (req, res) => {
 
 
 
+
+
 export const crearVenta = async (req, res) => {
   try {
     const { id_usuario, id_producto, total } = req.body;
 
+    // Validaciones básicas
     if (!id_usuario) return res.status(400).json({ mensaje: "id_usuario es obligatorio" });
     if (!id_producto) return res.status(400).json({ mensaje: "id_producto es obligatorio" });
     if (total === undefined || isNaN(total) || total <= 0) return res.status(400).json({ mensaje: "total debe ser un número positivo" });
 
+    // Verificar que el usuario exista
     const [usuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
     if (usuario.length === 0) return res.status(404).json({ mensaje: `No existe el usuario con id ${id_usuario}` });
 
-    const [producto] = await pool.query(
-      "SELECT * FROM productos WHERE id_producto = ? AND estado = 'disponible'",
+    // Verificar que el producto exista y esté disponible
+    const [producto] = await pool.query("SELECT * FROM productos WHERE id_producto = ? AND estado = 'disponible'",
       [id_producto]
     );
-    if (producto.length === 0) return res.status(404).json({ mensaje: `Producto no existe o ya está vendido` });
 
+    if (producto.length === 0) return res.status(404).json({ mensaje: "Producto no existe o ya está vendido" });
+
+    const prod = producto[0];
+
+    // Chequear stock
+    if (prod.cantidad <= 0) {return res.status(400).json({ mensaje: "No hay stock disponible para este producto" });
+    }
+
+    // Crear la venta
     const nuevaVenta = await createVenta({ id_usuario, id_producto, total });
-    res.status(201).json({ mensaje: "Venta creada exitosamente", venta: nuevaVenta });
+
+    // Actualizar stock y estado del producto
+    const nuevaCantidad = prod.cantidad - 1;
+    const nuevoEstado = nuevaCantidad === 0 ? "vendido" : "disponible";
+
+    await pool.query("UPDATE productos SET cantidad = ?, estado = ? WHERE id_producto = ?",
+      [nuevaCantidad, nuevoEstado, id_producto]
+    );
+
+    // Respuesta exitosa
+    res.status(201).json({
+      mensaje: "Venta creada exitosamente",
+      venta: nuevaVenta,
+      stock_restante: nuevaCantidad,
+      estado_actual: nuevoEstado,
+    });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: "Error al crear la venta", error: error.message });
+    console.error("Error al crear la venta:", error);
+    res.status(500).json({ message: "Error al crear la venta", error: error.message });
   }
 };
+
 
 export const actualizarVenta = async (req, res) => {
   try {
@@ -96,11 +124,11 @@ export const actualizarVenta = async (req, res) => {
 
   
     const [ventaExistente] = await pool.query("SELECT * FROM ventas WHERE id_venta = ?", [id]);
-    if (ventaExistente.length === 0) return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
+    if (ventaExistente.length === 0) return res.status(404).json({ message: `No se encontró la venta con id ${id}` });
 
     if (id_usuario) {
       const [usuario] = await pool.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
-      if (usuario.length === 0) return res.status(404).json({ mensaje: `No existe el usuario con id ${id_usuario}` });
+      if (usuario.length === 0) return res.status(404).json({ message: `No existe el usuario con id ${id_usuario}`});
     }
 
     if (id_producto) {
@@ -108,19 +136,18 @@ export const actualizarVenta = async (req, res) => {
         "SELECT * FROM productos WHERE id_producto = ? AND estado = 'disponible'",
         [id_producto]
       );
-      if (producto.length === 0) return res.status(404).json({ mensaje: `Producto no existe o ya está vendido` });
+      if (producto.length === 0) return res.status(404).json({ message: "Producto no existe o ya está vendido" });
     }
 
-    if (total !== undefined && (isNaN(total) || total <= 0)) {
-      return res.status(400).json({ mensaje: "total debe ser un número positivo" });
+    if (total !== undefined && (isNaN(total) || total <= 0)) {return res.status(400).json({ message: "Total debe ser un número positivo" });
     }
 
     const ventaActualizada = await updateVenta(id, { id_usuario, id_producto, total });
-    res.status(200).json({ mensaje: "Venta actualizada", venta: ventaActualizada });
+    res.status(200).json({ message: "Venta actualizada", venta: ventaActualizada });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ mensaje: "Error al actualizar la venta", error: error.message });
+    res.status(500).json({ message: "Error al actualizar la venta", error: error.message });
   }
 };
 
@@ -128,13 +155,13 @@ export const eliminarVenta = async (req, res) => {
   try {
     const { id } = req.params;
     const [ventaExistente] = await pool.query("SELECT * FROM ventas WHERE id_venta = ?", [id]);
-    if (ventaExistente.length === 0) return res.status(404).json({ mensaje: `No se encontró la venta con id ${id}` });
+    if (ventaExistente.length === 0) return res.status(404).json({ message:` No se encontró la venta con id ${id}` });
 
     await deleteVenta(id);
-    res.status(200).json({ mensaje: "Venta eliminada correctamente" });
+    res.status(200).json({ message: "Venta eliminada correctamente" });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ mensaje: "Error al eliminar la venta", error: error.message });
+    res.status(500).json({ message: "Error al eliminar la venta", error: error.message });
   }
 };

@@ -1,0 +1,91 @@
+
+.favorite-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.favorite-container h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.favorite-container > button {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px 20px;
+  background-color: #595656;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.favorite-container > button:hover {
+  background-color: #ff3b3b;
+}
+
+/* Contenedor de los items */
+.favorite-second {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjeta de cada producto favorito */
+.favorito-item {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorito-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.favorito-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.favorito-item h3 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.favorito-item p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* Botones dentro de cada tarjeta */
+.favorito-item button {
+  padding: 8px 12px;
+  background-color: #595656;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.favorito-item button:hover {
+  background-color: #ff3b3b;
+}

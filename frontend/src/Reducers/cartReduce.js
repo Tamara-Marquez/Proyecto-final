@@ -15,12 +15,17 @@ export const updateLocalStorage = state => {
 // guarda las acciones que hace el state
 
 const UPDATE_STATE_BY_ACTION = {
+  
   [CART_ACTION_TYPES.ADD_TO_CART]: (state, action) => {
-    const { id_producto } = action.payload
+    const { id_producto, cantidad } = action.payload
     const productInCartIndex = state.findIndex(item => item.id_producto === id_producto)
 
     if (productInCartIndex >= 0) {
-    
+      const productInCart = state[productInCartIndex];
+      if (productInCart.cantidad >= cantidad) {
+        alert("No hay más stock disponible de este producto");
+        return state; 
+      }
       const newState = state.map(item => {
         if (item.id_producto === id_producto) {
           return {
@@ -47,16 +52,19 @@ const UPDATE_STATE_BY_ACTION = {
     updateLocalStorage(newState)
     return newState
   },
+
   [CART_ACTION_TYPES.REMOVE_FROM_CART]: (state, action) => {
     const { id_producto } = action.payload
     const newState = state.filter(item => item.id_producto !== id_producto)
     updateLocalStorage(newState)
     return newState
   },
+
   [CART_ACTION_TYPES.CLEAR_CART]: () => {
     updateLocalStorage([])
     return []
   },
+
     [CART_ACTION_TYPES.DECREMENT_ITEM]: (state, action) => {
     const { id_producto } = action.payload
     const newState = state.map(item => {

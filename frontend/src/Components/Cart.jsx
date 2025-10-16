@@ -60,19 +60,19 @@ export function Cart () {
     const { cart, clearCart, addToCart, removeFromCart } = useCart()
     const [isOpen, setIsOpen] = useState(false)
     const [prevCartLength, setPrevCartLength] = useState(0)
-    const {isLoggedIn} = useAuth();
-    const {openLogin} = useModal();
+    // const {isLoggedIn} = useAuth();
+    // const {openLogin} = useModal();
 
     const totalItems = cart.reduce((total, item) => total + item.cantidad, 0)
     const totalPrice = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0)
 
-    const handleAdd = () => {
-        if (isLoggedIn) {
-            addToCart ({...producto, cantidad:1});
-        } else {
-            openLogin();
-        }
-    };
+    // const handleAdd = () => {
+    //     if (isLoggedIn) {
+    //         addToCart ({...producto, cantidad:1});
+    //     } else {
+    //         openLogin();
+    //     }
+    // };
 
     useEffect(() => {
         if (cart.length > prevCartLength) {
@@ -110,7 +110,7 @@ export function Cart () {
                     cart.map(producto => (
                         <CartItem
                             key={producto.id_producto}
-                                addToCart={handleAdd}
+                                addToCart={addToCart}
                                 removeFromCart={removeFromCart} 
                                 {...producto}
                         />
