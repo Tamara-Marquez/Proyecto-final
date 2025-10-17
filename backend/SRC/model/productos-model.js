@@ -64,14 +64,14 @@ export const getProductsById = async (id) => {
 
 export const createProducts = async (producto) => {
     try {
-        const { marca, modelo, anio, precio, descripcion, id_categoria, id_usuario } = producto;
-
+        const { marca, modelo, anio, precio, descripcion,image,  id_categoria} = producto;
+        console.log("📦 Datos recibidos para insertar:", producto);
         const query = `
             INSERT INTO productos 
-            (marca, modelo, anio, precio, descripcion, id_categoria, id_usuario) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`;
+            (marca, modelo, anio, precio, descripcion,image, id_categoria) 
+            VALUES (?, ?, ?, ?, ?, ?,?)`;
         const [result] = await pool.query(query, [
-            marca, modelo, anio, precio, descripcion, id_categoria, id_usuario
+            marca, modelo, anio, precio, descripcion,image, id_categoria
         ]);
         const [rows] = await pool.query("SELECT * FROM productos WHERE id_producto = ?", [result.insertId]);
         return rows[0];
@@ -83,13 +83,13 @@ export const createProducts = async (producto) => {
 
 export const updateProduct = async (id, producto) => {
     try {
-        const { marca, modelo, anio, precio, descripcion, id_categoria, id_usuario } = producto;
+        const { marca, modelo, anio, precio, descripcion, id_categoria } = producto;
         const query = `
             UPDATE productos 
-            SET marca = ?, modelo = ?, anio = ?, precio = ?, descripcion = ?, id_categoria = ?, id_usuario = ?
+            SET marca = ?, modelo = ?, anio = ?, precio = ?, descripcion = ?, id_categoria = ? = ?
             WHERE id_producto = ? `;
         const [result] = await pool.query(query, [
-            marca, modelo, anio, precio, descripcion, id_categoria, id_usuario, id
+            marca, modelo, anio, precio, descripcion, id_categoria, id
         ]);
         if (result.affectedRows === 0) {
             throw new Error("Producto no encontrado");

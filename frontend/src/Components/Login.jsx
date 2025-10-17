@@ -5,6 +5,9 @@ import '../Styles/Login.css'
 import { useModal } from "../Context/ModalContext";
 import { useAuth } from "../Context/auth.jsx";
 import {login} from '../Config/fetch-login.js'
+import { toast } from 'react-toastify';
+import { ConfigToasty } from '../Config/Toasty.jsx';
+
 
 export default function Login() {
 

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {updateProduct} from '../Config/fetch-products.js'
 import "../Styles/DetalleProducto.css";
-
+import { toast } from "react-toastify";
+import { ConfigToasty } from "../Config/Toasty";
 
 const EditProductForm = ({producto, onUpdated, onCancel}) => {
     const [formData, setFormData] = useState (producto);
@@ -18,10 +19,10 @@ const EditProductForm = ({producto, onUpdated, onCancel}) => {
         try {
             const updated= await updateProduct(producto.id_producto, formData);
             onUpdated(updated.producto);
-            alert("✅ Producto actualizado con éxito");
+            toast.success(" Producto actualizado con éxito", ConfigToasty);
         } catch (error) {
             console.error("Error al actualizar el producto:", error);
-        alert("❌ Error al actualizar el producto");
+        toast.error(" Error al actualizar el producto", ConfigToasty);
         }
         finally {
             setLoading(false);

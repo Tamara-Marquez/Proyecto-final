@@ -4,7 +4,7 @@ import pool from "../config/bd.js"
 
 export const getCategory = async() => {
     try {
-        const query = "SELEC * FROM categorias"
+        const query = "SELECT * FROM categorias"
         const [rows]= await pool.query (query);
         return rows;
     } catch (error) {

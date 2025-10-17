@@ -3,13 +3,12 @@ import pool  from "../config/bd.js";
 
 export const getVentas = async () => {
   const query = `
-    SELECT v.id_venta, v.total,
-          u.nombre AS cliente_nombre, u.apellido AS cliente_apellido, u.email AS cliente_email,
-          p.marca, p.modelo, p.anio, p.precio AS precio_producto
+    SELECT v.id_venta, v.id_usuario, v.total,
+      dv.id_producto, p.marca, p.modelo, p.anio, dv.subtotal
     FROM ventas v
-    LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario
-    LEFT JOIN productos p ON v.id_producto = p.id_producto
-    ORDER BY v.fecha DESC
+    LEFT JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+    LEFT JOIN productos p ON dv.id_producto = p.id_producto
+    ORDER BY v.id_venta DESC;
   `;
   const [rows] = await pool.query(query);
   return rows;
@@ -37,60 +36,49 @@ export const getVentasPorCliente = async (idUsuario) => {
           p.marca, p.modelo, p.anio
     FROM ventas v
     LEFT JOIN productos p ON v.id_producto = p.id_producto
-    WHERE v.id_usuario = ?
-    ORDER BY v.fecha DESC
-  `;
+    WHERE v.id_usuario = ?`;
   const [rows] = await pool.query(query, [idUsuario]);
   return rows;
 };
 
 
 export const getTotalDeVentas = async () => {
-  const query = `SELECT SUM(total) AS total FROM ventas`;
+  const query = "SELECT SUM(total) AS total FROM ventas";
   const [rows] = await pool.query(query);
   return rows[0]?.total || 0;
 };
 
 
-export const getProductoMasVendido = async () => {
+export const updateProductoVendido = async (id_producto) => {
   const query = `
-    SELECT p.marca, p.modelo, p.anio, COUNT(*) AS veces_vendido
-    FROM ventas v
-    JOIN productos p ON v.id_producto = p.id_producto
-    GROUP BY v.id_producto
-    ORDER BY veces_vendido DESC
-    LIMIT 1
+    UPDATE productos
+    SET cantidad = cantidad - 1,
+        estado = CASE WHEN cantidad - 1 <= 0 THEN 'vendido' ELSE 'disponible' END
+    WHERE id_producto = ?
   `;
-  const [rows] = await pool.query(query);
-  return rows.length ? rows[0] : null;
+  await pool.query(query, [id_producto]);
 };
 
 
-export const getVentasPorFecha = async (fechaInicio, fechaFin) => {
+
+
+export const createVenta = async ({ id_usuario, total }) => {
   const query = `
-    SELECT v.id_venta, v.fecha, v.total,
-          u.nombre AS cliente_nombre, u.apellido AS cliente_apellido,
-          p.marca, p.modelo
-    FROM ventas v
-    LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario
-    LEFT JOIN productos p ON v.id_producto = p.id_producto
-    WHERE v.fecha BETWEEN ? AND ?
-    ORDER BY v.fecha ASC
+    INSERT INTO ventas (id_usuario, total)
+    VALUES (?, ?)
   `;
-  const [rows] = await pool.query(query, [fechaInicio, fechaFin]);
-  return rows;
+  const [result] = await pool.query(query, [id_usuario, total]);
+  return { id_venta: result.insertId, id_usuario, total };
 };
 
-
-export const createVenta = async ({ id_usuario, id_producto, total }) => {
+export const createDetalleVenta = async ({ id_venta, id_producto, subtotal }) => {
   const query = `
-    INSERT INTO ventas (id_usuario, id_producto, total)
-    VALUES (?, ?, ?)
+    INSERT INTO detalle_venta (id_venta, id_producto, cantidad, subtotal)
+    VALUES (?, ?, 1, ?)
   `;
-  const [result] = await pool.query(query, [id_usuario, id_producto, total]);
-  return { id_venta: result.insertId, id_usuario, id_producto, total };
+  const [result] = await pool.query(query, [id_venta, id_producto, subtotal]);
+  return result;
 };
-
 
 export const updateVenta = async (id, { id_usuario, id_producto, total }) => {
   const query = `
@@ -104,7 +92,7 @@ export const updateVenta = async (id, { id_usuario, id_producto, total }) => {
 
 
 export const deleteVenta = async (id) => {
-  const query = `DELETE FROM ventas WHERE id_venta = ?`;
+  const query = "DELETE FROM ventas WHERE id_venta = ?";
   const [result] = await pool.query(query, [id]);
   return result.affectedRows > 0;
 };

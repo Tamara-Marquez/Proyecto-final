@@ -6,6 +6,8 @@ import { API_URL } from "../Config/api.js";
 import { useAuth } from '../Context/auth';
 import EditProducts from '../Components/EditProduct.jsx'
 import { deleteProduct } from "../Config/fetch-products.js";
+import { toast } from 'react-toastify';
+import { ConfigToasty } from '../Config/Toasty.jsx';
 
 const DetalleProducto = () => {
     const { id } = useParams();
@@ -29,8 +31,8 @@ useEffect(() => {
         if (!res.ok) throw new Error("Error al obtener el producto");
             const data = await res.json();
         setProducto(data);
-    } catch (err) {
-        setError(err.message);
+    } catch (error) {
+        setError(error.message);
     } finally {
         setLoading(false);
     }
@@ -41,20 +43,20 @@ useEffect(() => {
 
 const handleDelete= async () =>{
     if (!user || user.id_rol !== 1) {
-        alert("❌ No tienes permisos para eliminar productos");
+        toast.error(" No tienes permisos para eliminar productos", ConfigToasty);
         return;
     }
     if (window.confirm("¿Estás seguro de eliminar este producto?")){
         
         try {
             await deleteProduct(producto.id_producto);
-            alert("🗑️ Producto eliminado correctamente");
+            toast.success("🗑️ Producto eliminado correctamente", ConfigToasty);
             navigate("/")
         } catch (error) {
             if (error.response?.status === 403) {
-            alert("❌ No tienes permisos para eliminar este producto");
+            toast.error(" No tienes permisos para eliminar este producto",ConfigToasty);
         } else {
-            alert("❌ Error al eliminar el producto");
+            toast.error("Error al eliminar el producto", ConfigToasty);
         }
             console.error (error);
         }

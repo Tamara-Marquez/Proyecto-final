@@ -9,8 +9,8 @@ const router= Router();
 
 router.get('/productos', getAllProductsController);
 router.get('/productos/:id', validateId, getProductByIdController); 
-router.post('/productos', isAutenticated,isAdmin, validateCreateProduct, createProductController);
-router.put('/productos/:id', isAutenticated,isAdmin, validateUpdateProduct, updateProductController);
+router.post('/productos', validateCreateProduct, createProductController);
+router.put('/productos/:id', validateUpdateProduct, updateProductController);
 router.delete('/productos/:id', validateDeleteProduct, deleteProductController);
 
 export default router;

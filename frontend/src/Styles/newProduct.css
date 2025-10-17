@@ -1,0 +1,103 @@
+@import '../Styles/ProductCard.css';
+
+
+/* ========== FORMULARIO NUEVO PRODUCTO (ADMIN) ========== */
+.new-product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh; 
+    background-color: #f5f7fa; 
+    padding: 40px 20px;
+}
+
+/* Card del formulario */
+.new-product-card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 600px; 
+    padding: 40px;
+    animation: fadeIn 0.6s ease;
+    transition: all 0.3s ease;
+}
+
+.new-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.new-product-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+/* Inputs */
+.product-input {
+    width: 90%;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-input:focus {
+    border-color: #09f;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 153, 255, 0.3);
+}
+
+/* Botón */
+.create-button {
+    width: 95%;
+    padding: 14px 0;
+    background-color: #09f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-button:hover {
+    background-color: #0077cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 153, 255, 0.4);
+}
+
+.create-button:active {
+    transform: translateY(0);
+}
+
+/* Reutilizamos la animación de tus cards */
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-preview {
+    width: 90%;
+    max-height: 350px;
+    aspect-ratio: 16/9; 
+    object-fit: cover; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}

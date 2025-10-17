@@ -5,6 +5,8 @@ import { useCart } from '../Hooks/useCart.js'
 import { useAuth } from '../Context/auth.jsx';
 import { useModal } from '../Context/ModalContext.jsx';
 import { crearVenta } from '../Config/fetch-ventas.js';
+import { toast } from 'react-toastify';
+import { ConfigToasty } from '../Config/Toasty.jsx';
 
 function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_producto}) {
     const { decrementItem, removeFromCart,  } = useCart()
@@ -70,6 +72,7 @@ export function Cart () {
     const totalPrice = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0)
 
 
+
     useEffect(() => {
         if (cart.length > prevCartLength) {
             setIsOpen(true)
@@ -82,46 +85,50 @@ export function Cart () {
         setPrevCartLength(cart.length);
     }, [cart.length, prevCartLength]);
 
-    // const handleCompra = async (producto) => {
-//         try {
-//                 const id_usuario = user.id_usuario; 
-//                 const total = producto.precio;
-//                  console.log("🛒 Producto recibido:", producto);
-                
-//                 const venta = await crearVenta({
-//                     id_usuario:user.id_usuario,
-//                     id_producto: producto.id_producto,
-//                     total: producto.precio
-//                     });
-//                     console.log("🧾 Datos enviados a crearVenta:", ventaData);
 
-//             alert("Compra realizada con éxito!");
-//             console.log("Venta creada:", venta);
+// const handleCompra = async (cart) => {
+//     try {
+//         for (const producto of cart) {
+//             const ventaData = {
+//             id_usuario: user.id_usuario, 
+//             id_producto: producto.id_producto,
+//             cantidad: producto.quantity || 1,
+//             total: producto.precio * (producto.quantity || 1),
+//         };
 
-//             } catch (error) {
-//   console.error("Error en la compra:", error);
-//   console.log("Detalle del error:", error.response?.data);
-//   alert(error.response?.data?.mensaje || "Error al procesar la compra");
-// }
+//         await crearVenta(ventaData);
+//     }
+
+//     toast.success(" Compra realizada con éxito", ConfigToasty);
+//     clearCart();
+// } catch (error) {
+//     toast.error(" Error en la compra:", error,ConfigToasty);
+//     }
+// };
 const handleCompra = async (cart) => {
-  try {
-    for (const producto of cart) {
-      const ventaData = {
-        id_usuario: user.id_usuario, // o el nombre correcto del campo en tu backend
-        id_producto: producto.id_producto,
-        cantidad: producto.quantity || 1,
-        total: producto.precio * (producto.quantity || 1),
-      };
+    try {
+        const productos = cart.map((producto) => ({
+            id_producto: producto.id_producto,
+            cantidad: producto.quantity || 1,
+            subtotal: producto.precio * (producto.quantity || 1),
+            }));
 
-      console.log("📦 Enviando venta:", ventaData);
-      await crearVenta(ventaData);
-    }
+    const total = productos.reduce((acc, p) => acc + p.subtotal, 0);
 
-    alert("✅ Compra realizada con éxito");
+    const ventaData = {
+        id_usuario: user.id_usuario,
+        productos, 
+        total,
+        };
+
+    console.log("📦 Enviando venta:", ventaData);
+    await crearVenta(ventaData);
+
+    toast.success("Compra realizada con éxito", ConfigToasty);
     clearCart();
-  } catch (error) {
-    console.error("❌ Error en la compra:", error);
-  }
+    } catch (error) {
+        toast.error(" Error en la compra:", error, ConfigToasty);
+    }
 };
 
 

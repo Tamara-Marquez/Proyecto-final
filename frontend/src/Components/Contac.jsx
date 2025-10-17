@@ -1,6 +1,8 @@
 import React from "react";
 import { useState} from "react";
 import '../Styles/Contact.css'
+import { toast } from "react-toastify";
+import { ConfigToasty } from "../Config/Toasty";
 
 const Contact = () => {
     const [values, setValues]= useState ({
@@ -22,6 +24,7 @@ const Contact = () => {
 
     const handleForm = (e)=> {
         e.preventDefault ();
+        toast.success("Gracias por contactarse", ConfigToasty);
         console.log (values)
     };
 
@@ -86,7 +89,8 @@ return (
             name="myButton" 
             value="Submit" 
             autoFocus
-            className="contact-button">
+            className="contact-button"
+            >
                 Enviar Formulario
             </button>
         </form>

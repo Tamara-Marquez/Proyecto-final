@@ -31,6 +31,9 @@ export const validateCreateProduct = [
     check("descripcion")
         .optional()
         .isLength({ max: 500 }).withMessage("La descripción no puede superar 500 caracteres"),
+        check("image")
+        .notEmpty().withMessage("Cargar una imagen por favor")
+        .isString().withMessage("La URL debe ser texto"),
     check("id_categoria")
         .notEmpty().withMessage("La categoría es obligatoria")
         .isInt().withMessage("La categoría debe ser un número"),

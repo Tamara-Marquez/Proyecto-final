@@ -8,9 +8,9 @@ const router = Router();
 
 router.get('/categoria', getAllCategoryController);
 router.get('/categoria/:id', validateCategoryId, getCategoryByIdController);
-router.post('/categoria', isAutenticated,isAdmin, validateCreateCategory, createCategoryController);
-router.put('/categoria/:id', isAutenticated,isAdmin, validateUpdateCategory, updateCategoryController);
-router.delete('/categoria/:id', isAutenticated,isAdmin, validateDeleteCategory, deleteCategoryController);
+router.post('/categoria', validateCreateCategory, createCategoryController);
+router.put('/categoria/:id', validateUpdateCategory, updateCategoryController);
+router.delete('/categoria/:id', validateDeleteCategory, deleteCategoryController);
 
 export default router;
 
