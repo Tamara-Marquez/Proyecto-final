@@ -51,6 +51,20 @@ CREATE TABLE ventas (
         ON UPDATE CASCADE ON DELETE SET NULL
 );
 
+CREATE TABLE detalle_venta (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT,
+    id_producto INT,
+    cantidad INT DEFAULT 1,
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (id_venta) REFERENCES ventas(id_venta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
 -- ROLES --
 
 INSERT INTO Rol (id_rol, nombre_rol) VALUES

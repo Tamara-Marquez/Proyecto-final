@@ -4,6 +4,7 @@ import { CartIcon, ClearCartIcon } from '../assets/icon.jsx'
 import { useCart } from '../Hooks/useCart.js'
 import { useAuth } from '../Context/auth.jsx';
 import { useModal } from '../Context/ModalContext.jsx';
+import { crearVenta } from '../Config/fetch-ventas.js';
 
 function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_producto}) {
     const { decrementItem, removeFromCart,  } = useCart()
@@ -27,6 +28,8 @@ function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_produ
             openLogin();
         }
     };
+
+    
 
     return (
     <li>
@@ -60,19 +63,12 @@ export function Cart () {
     const { cart, clearCart, addToCart, removeFromCart } = useCart()
     const [isOpen, setIsOpen] = useState(false)
     const [prevCartLength, setPrevCartLength] = useState(0)
-    // const {isLoggedIn} = useAuth();
-    // const {openLogin} = useModal();
+    const { user } = useAuth();
+
 
     const totalItems = cart.reduce((total, item) => total + item.cantidad, 0)
     const totalPrice = cart.reduce((total, item) => total + (item.precio * item.cantidad), 0)
 
-    // const handleAdd = () => {
-    //     if (isLoggedIn) {
-    //         addToCart ({...producto, cantidad:1});
-    //     } else {
-    //         openLogin();
-    //     }
-    // };
 
     useEffect(() => {
         if (cart.length > prevCartLength) {
@@ -85,6 +81,49 @@ export function Cart () {
         }
         setPrevCartLength(cart.length);
     }, [cart.length, prevCartLength]);
+
+    // const handleCompra = async (producto) => {
+//         try {
+//                 const id_usuario = user.id_usuario; 
+//                 const total = producto.precio;
+//                  console.log("🛒 Producto recibido:", producto);
+                
+//                 const venta = await crearVenta({
+//                     id_usuario:user.id_usuario,
+//                     id_producto: producto.id_producto,
+//                     total: producto.precio
+//                     });
+//                     console.log("🧾 Datos enviados a crearVenta:", ventaData);
+
+//             alert("Compra realizada con éxito!");
+//             console.log("Venta creada:", venta);
+
+//             } catch (error) {
+//   console.error("Error en la compra:", error);
+//   console.log("Detalle del error:", error.response?.data);
+//   alert(error.response?.data?.mensaje || "Error al procesar la compra");
+// }
+const handleCompra = async (cart) => {
+  try {
+    for (const producto of cart) {
+      const ventaData = {
+        id_usuario: user.id_usuario, // o el nombre correcto del campo en tu backend
+        id_producto: producto.id_producto,
+        cantidad: producto.quantity || 1,
+        total: producto.precio * (producto.quantity || 1),
+      };
+
+      console.log("📦 Enviando venta:", ventaData);
+      await crearVenta(ventaData);
+    }
+
+    alert("✅ Compra realizada con éxito");
+    clearCart();
+  } catch (error) {
+    console.error("❌ Error en la compra:", error);
+  }
+};
+
 
 
     return (
@@ -128,7 +167,8 @@ export function Cart () {
                         <ClearCartIcon />
                     </button>
                     <div>
-                    <button className='end-buy' >
+                    <button className='end-buy' 
+                        onClick={()=> handleCompra(cart)}>
                         Finalizar compra
                     </button>
                     </div>
