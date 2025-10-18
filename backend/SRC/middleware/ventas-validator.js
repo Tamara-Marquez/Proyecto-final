@@ -42,3 +42,11 @@ export const validarIdVenta = [
     next();
   }
 ];
+
+export const validarIdUsuario = (req, res, next) => {
+  const { idUsuario } = req.params;
+  if (!idUsuario || isNaN(Number(idUsuario))) {
+    return res.status(400).json({ msg: "ID de usuario inválido" });
+  }
+  next();
+};

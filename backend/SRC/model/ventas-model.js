@@ -4,10 +4,13 @@ import pool  from "../config/bd.js";
 export const getVentas = async () => {
   const query = `
     SELECT v.id_venta, v.id_usuario, v.total,
+      u.nombre AS nombre_usuario,
+      u.email AS email,
       dv.id_producto, p.marca, p.modelo, p.anio, dv.subtotal
     FROM ventas v
     LEFT JOIN detalle_venta dv ON v.id_venta = dv.id_venta
     LEFT JOIN productos p ON dv.id_producto = p.id_producto
+    LEFT JOIN usuarios u ON v.id_usuario = u.id_usuario
     ORDER BY v.id_venta DESC;
   `;
   const [rows] = await pool.query(query);
@@ -30,13 +33,41 @@ export const getVentaById = async (id) => {
 };
 
 
+// export const getVentasPorCliente = async (idUsuario) => {
+//   const query = `
+//       SELECT 
+//         v.id_venta,
+//         v.id_usuario,
+//         v.id_producto,
+//         v.total AS subtotal,
+//         p.marca,
+//         p.modelo,
+//         p.anio
+//       FROM ventas v
+//       INNER JOIN productos p ON v.id_producto = p.id_producto
+//       WHERE v.id_usuario = ?
+//     `;
+//   const [rows] = await pool.query(query, [idUsuario]);
+//   return rows;
+// };
 export const getVentasPorCliente = async (idUsuario) => {
   const query = `
-    SELECT v.id_venta, v.total,
-          p.marca, p.modelo, p.anio
-    FROM ventas v
-    LEFT JOIN productos p ON v.id_producto = p.id_producto
-    WHERE v.id_usuario = ?`;
+      SELECT 
+        v.id_venta,
+        v.id_usuario,
+        v.total,
+        dv.id_producto,
+        dv.cantidad,
+        dv.subtotal,
+        p.marca,
+        p.modelo,
+        p.anio
+      FROM ventas v
+      INNER JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+      INNER JOIN productos p ON dv.id_producto = p.id_producto
+      WHERE v.id_usuario = ?
+      ORDER BY v.id_venta DESC
+    `;
   const [rows] = await pool.query(query, [idUsuario]);
   return rows;
 };

@@ -11,7 +11,7 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa';
 
 const Cards = ({ categoriaNombre, producto }) => {
 
-    const navigate = useNavigate();
+const navigate = useNavigate();
 
     const { addToCart, removeFromCart, cart } = useCart();
 

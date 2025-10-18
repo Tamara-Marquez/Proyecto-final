@@ -1,0 +1,80 @@
+.mis-compras-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+.mis-compras-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d3436;
+    margin-bottom: 15px;
+}
+
+.btn-refresh {
+    padding: 10px 20px;
+    background-color: #636e72;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.btn-refresh:hover {
+    background-color: #4b5458;
+}
+
+.tabla-compras {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-compras thead {
+    background-color: #2d3436;
+    color: #fff;
+}
+
+.tabla-compras th,
+.tabla-compras td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.tabla-compras th {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla-compras tr {
+    border-bottom: 1px solid #54595c;
+    transition: background-color 0.2s;
+}
+
+.tabla-compras tbody tr:hover {
+    background-color: #bbc0c8;
+}
+
+.tabla-compras td {
+    font-size: 14px;
+}
+
+.tabla-compras td:nth-child(5) {
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.mis-compras-container p {
+    font-size: 16px;
+    color: #636e72;
+    text-align: center;
+    padding: 20px 0;
+}

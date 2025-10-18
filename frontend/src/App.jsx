@@ -16,6 +16,9 @@ import { FavoriteProvider } from "./Context/favorite";
 import Favoritos  from "./Components/Favorites";
 import CrearProducto from "./Components/NewProduct";
 import { ToastContainer} from 'react-toastify';
+import AdminVentas from "./Components/Ventas";
+import MisCompras from "./Components/Compras";
+import NotFound from "./Components/NotFound";
 
 function AppContent() {
   const {showLogin, closeLogin, showRegister, closeRegister} = useModal();
@@ -32,6 +35,9 @@ function AppContent() {
         <Route path="/contacto" element={<Contact />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/admin/nuevoproducto" element={<CrearProducto />} />
+        <Route path="/admin/ventas" element={<AdminVentas />} />
+        <Route path="/mis-compras" element={<MisCompras />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {showLogin && (
         <div className="modal-overlay">
