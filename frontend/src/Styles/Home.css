@@ -129,11 +129,13 @@
   cursor: pointer;
   transition: var(--transition);
   font-size: 1rem;
+  border-radius: 0%;
 }
 
 .search-btn:hover {
   background: #d63850;
   transform: translateX(2px);
+  border-radius: 0%;
 }
 
 /* HERO STATS */

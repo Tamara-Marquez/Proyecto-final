@@ -52,7 +52,7 @@ function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_produ
                 <small className="subtotal">
                     Subtotal: ${(precio * cantidad).toLocaleString('es-AR')}
                 </small>
-                <button onClick={() => removeFromCart({ id_producto })}>
+                <button className="clear-cart-button" onClick={() => removeFromCart({ id_producto })}>
                     <ClearCartIcon />
                 </button>
     </footer>
@@ -170,7 +170,7 @@ const handleCompra = async (cart) => {
                         Total: ${totalPrice.toLocaleString('es-AR')}
                     </div >
                     <div  className="quantity-controls">
-                    <button onClick={clearCart}>
+                    <button className="clear-cart-button" onClick={clearCart}>
                         <ClearCartIcon />
                     </button>
                     <div>
