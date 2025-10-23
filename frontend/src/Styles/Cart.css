@@ -108,11 +108,21 @@
 .quantity-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 8px;
-    background: #2b2b2b;
+    /* background: #2b2b2b; */
     padding: 8px 12px;
     border-radius: 8px;
+    flex-wrap: nowrap; 
+    flex-shrink: 0; 
+}
+
+.quantity-controls .quantity {
+    white-space: nowrap; 
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #f5f5f5;
 }
 
 .quantity-controls button {
@@ -120,8 +130,8 @@
     color: #fff;
     border: none;
     border-radius: 6px;
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
@@ -129,6 +139,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+     flex-shrink: 0; /* que no se achiquen al reducir el espacio */
+    width: 30px;
+    height: 30px;
 }
 
 .quantity-controls button:hover {

@@ -45,9 +45,9 @@ function CartItem ({ image, precio, marca,modelo, cantidad, addToCart,  id_produ
 
     <footer>
                 <div className="quantity-controls">
-                    <button onClick={handleDecrement}>-</button>
+                    <button className=" buy-quantity" onClick={handleDecrement}>-</button>
                     <small className='quantity'>Cantidad: {cantidad}</small>
-                    <button onClick={handleAdd}>+</button>
+                    <button className="buy-quantity" onClick={handleAdd}>+</button>
                 </div>
                 <small className="subtotal">
                     Subtotal: ${(precio * cantidad).toLocaleString('es-AR')}
@@ -85,26 +85,6 @@ export function Cart () {
         setPrevCartLength(cart.length);
     }, [cart.length, prevCartLength]);
 
-
-// const handleCompra = async (cart) => {
-//     try {
-//         for (const producto of cart) {
-//             const ventaData = {
-//             id_usuario: user.id_usuario, 
-//             id_producto: producto.id_producto,
-//             cantidad: producto.quantity || 1,
-//             total: producto.precio * (producto.quantity || 1),
-//         };
-
-//         await crearVenta(ventaData);
-//     }
-
-//     toast.success(" Compra realizada con éxito", ConfigToasty);
-//     clearCart();
-// } catch (error) {
-//     toast.error(" Error en la compra:", error,ConfigToasty);
-//     }
-// };
 const handleCompra = async (cart) => {
     try {
         const productos = cart.map((producto) => ({
@@ -127,7 +107,7 @@ const handleCompra = async (cart) => {
     toast.success("Compra realizada con éxito", ConfigToasty);
     clearCart();
     } catch (error) {
-        toast.error(" Error en la compra:", error, ConfigToasty);
+        toast.error(" Error en la compra: iniciar sesión", error, ConfigToasty);
     }
 };
 

@@ -83,13 +83,16 @@ export const createProducts = async (producto) => {
 
 export const updateProduct = async (id, producto) => {
     try {
-        const { marca, modelo, anio, precio, descripcion, id_categoria } = producto;
+        const { marca, modelo, anio, precio, descripcion,image, id_categoria } = producto;
         const query = `
             UPDATE productos 
-            SET marca = ?, modelo = ?, anio = ?, precio = ?, descripcion = ?, id_categoria = ? = ?
+            SET marca = ?, modelo = ?, anio = ?, precio = ?, descripcion = ?,image = ?, id_categoria = ? 
             WHERE id_producto = ? `;
+
+            if (!marca || !modelo || !precio) throw new Error("Faltan campos obligatorios");
+            
         const [result] = await pool.query(query, [
-            marca, modelo, anio, precio, descripcion, id_categoria, id
+            marca, modelo, anio, precio, descripcion,image, id_categoria, id
         ]);
         if (result.affectedRows === 0) {
             throw new Error("Producto no encontrado");

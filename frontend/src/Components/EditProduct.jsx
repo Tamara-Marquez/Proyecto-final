@@ -18,7 +18,7 @@ const EditProductForm = ({producto, onUpdated, onCancel}) => {
         setLoading(true);
         try {
             const updated= await updateProduct(producto.id_producto, formData);
-            onUpdated(updated.producto);
+            onUpdated(updated);
             toast.success(" Producto actualizado con éxito", ConfigToasty);
         } catch (error) {
             console.error("Error al actualizar el producto:", error);
@@ -33,7 +33,10 @@ const EditProductForm = ({producto, onUpdated, onCancel}) => {
 return (
     <form onSubmit={handleSubmit} className="edit-form">
         <h2 className="edit-product">Editar producto</h2>
-
+        <img
+        src={formData.image || "/placeholder.jpg"}
+        alt="Vista previa"
+    />
         <input
             type="text"
             name="marca"
@@ -61,6 +64,15 @@ return (
             onChange={handleChange}
             placeholder="Descripción"
         />
+
+        <input
+        type="text"
+        name="image"
+        placeholder="URL de imagen"
+        value={formData.image}
+        onChange={handleChange}
+    />
+
 
     <div className="cta">
         <button className="btn primary" type="submit" disabled={loading}>

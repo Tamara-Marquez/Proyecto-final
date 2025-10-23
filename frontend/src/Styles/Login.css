@@ -130,8 +130,9 @@ h2 {
     align-items: center;
     border-radius: 12px;
     max-width: 350px;     
-    width: 75%;
-    padding: 8px 8px;      
+    width: 80%;
+    padding: 8px 8px;
+    
 }
 
 .welcome-container-register h2 {

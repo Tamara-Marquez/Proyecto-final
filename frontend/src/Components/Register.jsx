@@ -74,7 +74,7 @@ export default function Register() {
 
         <form onSubmit={handleSubmit}>
             <div className='form-group-register'>
-                <label > Nombre </label>
+                {/* <label > Nombre </label> */}
                 <input
                     type="text" 
                     name='nombre'
@@ -84,7 +84,7 @@ export default function Register() {
                 />
             </div>
             <div className='form-group-register'>
-                <label >Apellido </label>
+                {/* <label >Apellido </label> */}
                 <input
                     type="text" 
                     name='apellido'
@@ -94,7 +94,7 @@ export default function Register() {
                 />
             </div>
             <div className='form-group-register'>
-                <label > Correo electrónico </label>
+                {/* <label > Correo electrónico </label> */}
                 <input
                     type="email"
                     name='email'
@@ -104,7 +104,7 @@ export default function Register() {
                 />
             </div>
             <div className='form-group-register'>
-                <label > Tu contraseña </label>
+                {/* <label > Tu contraseña </label> */}
                 <input
                     type="password" 
                     name='password'
@@ -114,11 +114,11 @@ export default function Register() {
                 />
             </div>
             <div className='form-group-register'>
-                <label > Repite tu contraseña </label>
+                {/* <label > Repite tu contraseña </label> */}
                 <input
                     type="password" 
                     name='confirmPassword'
-                    placeholder="Tu contraseña nuevamente" 
+                    placeholder="Repite tu contraseña" 
                     value= {values.confirmPassword}
                     onChange={handleRegisterChange}
                 />
