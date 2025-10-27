@@ -1,15 +1,15 @@
 /* ======== CONTENEDOR GENERAL ======== */
-.contact-container {
+/* .contact-container {
     display: flex;
     justify-content: center;
     align-items: center;
     background: #c0c5c9;
     min-height: 100vh;
     padding: 40px 20px;
-}
+} */
 
 /* ======== FORMULARIO ======== */
-.contact-form {
+/* .contact-form {
     background: #ffffff;
     padding: 40px 35px;
     border-radius: 16px;
@@ -19,19 +19,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
+} */
 
 /* ======== TÍTULO ======== */
-.contact-title {
+/* .contact-title {
     text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
     color: #222;
     margin-bottom: 10px;
-}
+} */
 
 /* ======== INPUTS Y TEXTAREA ======== */
-.contact-input,
+/* .contact-input,
 .contact-textarea {
     width: 100%;
     padding: 12px 15px;
@@ -49,17 +49,194 @@
 .contact-textarea:focus {
     border-color: #515559;
     box-shadow: 0 0 5px rgba(39, 41, 42, 0.3);
-}
+} */
 
 /* ======== TEXTAREA ======== */
+/* .contact-textarea {
+    min-height: 120px;
+    resize: vertical;
+} */
+
+/* ======== BOTÓN ======== */
+/* .contact-button {
+    background-color: #595d62;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+} */
+
+/* .contact-button:hover {
+    background-color: #2c3035;
+    transform: scale(1.03);
+}
+
+.contact-button:active {
+    transform: scale(0.97);
+} */
+
+/* ======== PLACEHOLDERS ======== */
+/* .contact-input::placeholder,
+.contact-textarea::placeholder {
+    color: #888;
+} */
+
+/* ======== RESPONSIVO ======== */
+/* @media (max-width: 600px) {
+    .contact-form {
+        padding: 25px 20px;
+        border-radius: 12px;
+}
+
+    .contact-title {
+        font-size: 1.5rem;
+}
+} */
+
+
+/* ==================== VARIABLES GLOBALES ==================== */
+:root {
+  /* ========== FONDOS - MODO OSCURO ========== */
+--bg-primary: #0f1419;
+--bg-secondary: #1a1f2e;
+--bg-tertiary: #252d3d;
+--bg-hover: #2d3748;
+
+/* ========== TEXTOS - MODO OSCURO ========== */
+--text-primary: #f0f2f5;
+--text-secondary: #b0b8c1;
+--text-tertiary: #7a8a99;
+
+/* ========== COLORES DE ACENTO ========== */
+--accent: #0099ff;
+--accent-hover: #0088dd;
+--accent-light: rgba(0, 153, 255, 0.1);
+--accent-lighter: rgba(0, 153, 255, 0.05);
+
+/* ========== COLORES DE ESTADO ========== */
+--success: #10b981;
+--success-light: rgba(16, 185, 129, 0.1);
+--danger: #ef4444;
+--danger-light: rgba(239, 68, 68, 0.1);
+--warning: #f59e0b;
+--warning-light: rgba(245, 158, 11, 0.1);
+
+/* ========== BORDES Y SOMBRAS ========== */
+--border: #2d3748;
+--border-light: #3a4556;
+--shadow: rgba(0, 0, 0, 0.4);
+--shadow-sm: rgba(0, 0, 0, 0.2);
+
+/* ========== TRANSICIONES ========== */
+--transition: all 0.3s ease;
+--transition-fast: all 0.2s ease;
+}
+
+/* ========== MODO CLARO ========== */
+@media (prefers-color-scheme: light) {
+    :root {
+    /* FONDOS - MODO CLARO */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f0f4f8;
+    --bg-hover: #e9ecef;
+    
+    /* TEXTOS - MODO CLARO */
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-tertiary: #718096;
+    
+    /* ACENTO (se mantiene igual) */
+    --accent: #0099ff;
+    --accent-hover: #0077cc;
+    --accent-light: rgba(0, 153, 255, 0.08);
+    --accent-lighter: rgba(0, 153, 255, 0.03);
+    
+    /* ESTADO (colores más oscuros en modo claro) */
+    --success: #059669;
+    --success-light: rgba(5, 150, 105, 0.1);
+    --danger: #dc2626;
+    --danger-light: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --warning-light: rgba(217, 119, 6, 0.1);
+    
+    /* BORDES Y SOMBRAS */
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-sm: rgba(0, 0, 0, 0.04);
+}
+}
+
+/* ==================== CONTACT.CSS ==================== */
+
+/* Contenedor general */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Formulario */
+.contact-form {
+    background: var(--bg-tertiary);
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px var(--shadow-sm);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título */
+.contact-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+/* Inputs y Textarea */
+.contact-input,
+.contact-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+    box-sizing: border-box;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-lighter);
+}
+
+/* Textarea */
 .contact-textarea {
     min-height: 120px;
     resize: vertical;
 }
 
-/* ======== BOTÓN ======== */
+/* Botón */
 .contact-button {
-    background-color: #595d62;
+    background-color: var(--accent);
     color: #fff;
     font-weight: 600;
     border: none;
@@ -71,7 +248,7 @@
 }
 
 .contact-button:hover {
-    background-color: #2c3035;
+    background-color: var(--accent-hover);
     transform: scale(1.03);
 }
 
@@ -79,10 +256,10 @@
     transform: scale(0.97);
 }
 
-/* ======== PLACEHOLDERS ======== */
+/* Placeholders */
 .contact-input::placeholder,
 .contact-textarea::placeholder {
-    color: #888;
+    color: var(--text-tertiary);
 }
 
 /* ======== RESPONSIVO ======== */
@@ -90,9 +267,9 @@
     .contact-form {
         padding: 25px 20px;
         border-radius: 12px;
-}
+    }
 
     .contact-title {
         font-size: 1.5rem;
-}
+    }
 }

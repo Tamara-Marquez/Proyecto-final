@@ -1,6 +1,6 @@
 
 /* ========== FILTROS ========== */
-.filters {
+/* .filters {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -78,10 +78,10 @@
   background: #222;
   color: #eee;
   padding: 8px;
-}
+} */
 
 /* ========== CATÁLOGO ========== */
-.catalogo {
+/* .catalogo {
   padding: 24px;
   max-width: 1600px;
   margin: 0 auto;
@@ -103,19 +103,19 @@
 .catalogo h2:hover {
   border-left-width: 7px;
   padding-left: 18px;
-}
+} */
 
 /* ========== CONTENEDOR DE CARDS ========== */
-.cards-container {
+/* .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 32px;
   justify-items: center;
   padding: 0;
-}
+} */
 
 /* ========== PRODUCT CARD ========== */
-.product-card {
+/* .product-card {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -162,25 +162,25 @@
 
 .product-card:active {
   transform: translateY(-4px);
-}
+} */
 
 /* ========== IMAGEN DEL PRODUCTO ========== */
-.product-image {
+/* .product-image { */
   /* width: 100%;
   height: 250px;
   object-fit: cover; */
-  width: 100%;
+  /* width: 100%;
   aspect-ratio: 16/9; /* proporción fija */
-  object-fit: cover;
+  /* object-fit: cover;
   transition: transform 0.3s ease;
-}
+} */
 
-.product-card:hover .product-image {
+/* .product-card:hover .product-image {
   transform: scale(1.05);
-}
+} */ 
 
 /* ========== DETALLES DEL PRODUCTO ========== */
-.product-details {
+/* .product-details {
   padding: 20px;
   text-align: left;
 }
@@ -216,10 +216,10 @@
   color: #09f;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-}
+} */
 
 /* ========== BOTÓN DE COMPRA ========== */
-.container-button{
+/* .container-button{
   display: flex;
   gap: 10px;
   justify-content: center
@@ -253,16 +253,922 @@
 .buy-button:focus-visible {
   outline: 3px solid #09f;
   outline-offset: 2px;
-}
+} */
 
 /* Estilos para cuando está en el carrito */
-.buy-button[style*="rgba(201, 20, 20"] {
+/* .buy-button[style*="rgba(201, 20, 20"] {
   background-color: #ff4444 !important;
 }
 
 .buy-button[style*="rgba(201, 20, 20"]:hover {
   background-color: #ff6666 !important;
   box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3) !important;
+} */
+
+/* ========== PANTALLAS MUY GRANDES (> 1440px) ========== */
+/* @media (min-width: 1441px) {
+  .cards-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 36px;
+  }
+
+  .product-card {
+    max-width: 300px;
+  }
+} */
+
+
+/* ========== DESKTOP LARGE (1025px - 1440px) ========== */
+/* @media (max-width: 1440px) {
+  .catalogo {
+    max-width: 1400px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+} */
+
+/* ========== DESKTOP SMALL (769px - 1024px) ========== */
+/* @media (max-width: 1024px) {
+  .catalogo {
+    max-width: 1200px;
+  }
+
+  .catalogo h2 {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .product-card {
+    max-width: 380px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+} */
+
+/* ========== TABLETS (481px - 768px) ========== */
+/* @media (max-width: 768px) {
+  .filters {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .filtros {
+    margin: 20px;
+  }
+
+  .catalogo {
+    padding: 20px;
+  }
+
+  .catalogo h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .product-card {
+    max-width: 100%;
+  }
+
+  .product-image {
+    height: 200px;
+  }
+
+  .product-details {
+    padding: 18px;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+  }
+
+  .product-info {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 1.4rem;
+  }
+
+  .buy-button {
+    padding: 12px 16px;
+    font-size: 1rem;
+  } */
+/* } */
+
+/* ========== MOBILE (< 480px) ========== */
+/* @media (max-width: 480px) {
+  .filters {
+    flex-direction: column;
+    margin: 16px;
+    padding: 16px;
+  }
+
+  .filters select,
+  .filters input {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .filtros {
+    flex-direction: column;
+    margin: 16px;
+    padding: 12px;
+  }
+
+  .filtros select {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .catalogo {
+    padding: 16px;
+  }
+
+  .catalogo > div {
+    margin-bottom: 32px;
+  }
+
+  .catalogo h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left-width: 4px;
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .product-card {
+    max-width: 100%;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-details {
+    padding: 16px;
+  }
+
+  .product-name {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .product-info {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .product-price {
+    font-size: 1.3rem;
+    margin-top: 12px;
+    padding: 8px 0;
+  }
+
+  .buy-button {
+    margin-top: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+} */
+
+/* ========== ACCESIBILIDAD ========== */
+/* @media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-image,
+  .buy-button,
+  .catalogo h2,
+  .filters select,
+  .filters input,
+  .filtros select {
+    transition: none;
+  }
+
+  @keyframes fadeIn {
+    from, to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .product-card:hover {
+    transform: none;
+  }
+
+  .product-card:hover .product-image {
+    transform: none;
+  }
+
+  .product-card::before {
+    display: none;
+  }
+} */
+
+/* ========== MODO CLARO (si el sistema lo prefiere) ========== */
+/* @media (prefers-color-scheme: light) {
+  .filtros select {
+    background-color: #f8f9fa;
+    color: #222;
+    border-color: #ddd;
+  }
+
+  .filtros select:hover {
+    background-color: #e9ecef;
+    border-color: #999;
+  }
+
+  .filtros select:focus {
+    background-color: #fff;
+  }
+
+  .filtros option {
+    background: #fff;
+    color: #222;
+  }
+} */
+
+/* ========== FOCUS VISIBLE (mejora de accesibilidad) ========== */
+/* .filters select:focus-visible,
+.filters input:focus-visible,
+.filtros select:focus-visible {
+  outline: 3px solid #09f;
+  outline-offset: 2px;
+} */
+
+/* ========== ANIMACIÓN DE CARGA ========== */
+/* @keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.product-card.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ========== SEARCH HEADER ========== */
+/* .search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 24px;
+  padding: 16px 24px;
+  max-width: 900px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  border-left: 4px solid #09f;
+  flex-wrap: wrap;
+  gap: 16px;
+  animation: slideInDown 0.4s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-header h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #222;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.search-header h2:hover {
+  padding-left: 0;
+  border: none;
+} */ 
+
+/* ========== CLEAR SEARCH BUTTON ========== */
+/* .clear-search-btn {
+  padding: 10px 20px;
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.2);
+}
+
+.clear-search-btn:hover {
+  background: #d63850;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(233, 69, 96, 0.35);
+}
+
+.clear-search-btn:active {
+  transform: translateY(0);
+}
+
+.clear-search-btn:focus-visible {
+  outline: 3px solid #e94560;
+  outline-offset: 2px;
+}
+
+/* ========== NO RESULTS MESSAGE ========== */
+/* .no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease;
+}
+
+.no-results h2 {
+  font-size: 1.6rem;
+  color: #6c757d;
+  margin: 0 0 12px 0;
+  padding: 0;
+  border: none;
+  font-weight: 700;
+}
+
+.no-results h2:hover {
+  padding-left: 0;
+  border: none;
+}
+
+.no-results p {
+  color: #6c757d;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.no-results .clear-search-btn {
+  margin-top: 12px;
+  background: #09f;
+}
+
+.no-results .clear-search-btn:hover {
+  background: #0088dd;
+} */ */
+
+/* ========== CATEGORIA SECTION ========== */
+/* .categoria-section {
+  margin-bottom: 40px;
+}
+
+.categoria-section h2 {
+  font-size: 1.6rem;
+  color: #222;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  border-left: 4px solid #09f;
+  background: linear-gradient(90deg, rgba(0, 153, 255, 0.08) 0%, transparent 100%);
+  border-radius: 0 8px 8px 0;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.categoria-section h2:hover {
+  padding-left: 20px;
+  border-left-width: 6px;
+} */
+
+/* ========== RESPONSIVE - TABLETS ========== */
+/* @media (max-width: 768px) {
+  .search-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 20px;
+    margin: 0 20px 24px;
+  }
+  
+  .search-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .clear-search-btn {
+    width: 100%;
+    padding: 12px;
+  }
+  
+  .no-results {
+    padding: 50px 20px;
+    margin: 30px 20px;
+  }
+  
+  .categoria-section h2 {
+    font-size: 1.4rem;
+  }
+} */
+
+/* ========== RESPONSIVE - MOBILE ========== */
+/* @media (max-width: 480px) {
+  .search-header {
+    padding: 14px 16px;
+    margin: 0 16px 20px;
+  }
+  
+  .search-header h2 {
+    font-size: 1rem;
+  }
+  
+  .clear-search-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  
+  .no-results {
+    padding: 40px 16px;
+    margin: 24px 16px;
+  }
+  
+  .no-results h2 {
+    font-size: 1.3rem;
+  }
+  
+  .categoria-section h2 {
+    font-size: 1.3rem;
+    padding: 8px 12px;
+  }
+} */
+
+/* ========== ACCESIBILIDAD ========== */
+/* @media (prefers-reduced-motion: reduce) {
+  .search-header,
+  .clear-search-btn,
+  .categoria-section h2 {
+    transition: none;
+  }
+
+  @keyframes slideInDown {
+    from, to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .clear-search-btn:hover {
+    transform: none;
+  }
+}
+
+.product-card.admin-card {
+    border: 2px solid #09f;
+}
+
+.product-card.admin-card .buy-button {
+    background: linear-gradient(135deg, #09f 0%, #0af 100%);
+} */
+
+
+/* ==================== VARIABLES GLOBALES ==================== */
+:root {
+  /* ========== FONDOS - MODO OSCURO ========== */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #252d3d;
+  --bg-hover: #2d3748;
+  
+  /* ========== TEXTOS - MODO OSCURO ========== */
+  --text-primary: #f0f2f5;
+  --text-secondary: #b0b8c1;
+  --text-tertiary: #7a8a99;
+  
+  /* ========== COLORES DE ACENTO ========== */
+  --accent: #0099ff;
+  --accent-hover: #0088dd;
+  --accent-light: rgba(0, 153, 255, 0.1);
+  --accent-lighter: rgba(0, 153, 255, 0.05);
+  
+  /* ========== COLORES DE ESTADO ========== */
+  --success: #10b981;
+  --success-light: rgba(16, 185, 129, 0.1);
+  --danger: #ef4444;
+  --danger-light: rgba(239, 68, 68, 0.1);
+  --warning: #f59e0b;
+  --warning-light: rgba(245, 158, 11, 0.1);
+  
+  /* ========== BORDES Y SOMBRAS ========== */
+  --border: #2d3748;
+  --border-light: #3a4556;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  
+  /* ========== TRANSICIONES ========== */
+  --transition: all 0.3s ease;
+  --transition-fast: all 0.2s ease;
+}
+
+/* ========== MODO CLARO ========== */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* FONDOS - MODO CLARO */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f0f4f8;
+    --bg-hover: #e9ecef;
+    
+    /* TEXTOS - MODO CLARO */
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-tertiary: #718096;
+    
+    /* ACENTO (se mantiene igual) */
+    --accent: #0099ff;
+    --accent-hover: #0077cc;
+    --accent-light: rgba(0, 153, 255, 0.08);
+    --accent-lighter: rgba(0, 153, 255, 0.03);
+    
+    /* ESTADO (colores más oscuros en modo claro) */
+    --success: #059669;
+    --success-light: rgba(5, 150, 105, 0.1);
+    --danger: #dc2626;
+    --danger-light: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --warning-light: rgba(217, 119, 6, 0.1);
+    
+    /* BORDES Y SOMBRAS */
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-sm: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ==================== CATALOGO.CSS ==================== */
+
+/* ========== FILTROS ========== */
+.filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 24px auto;
+  max-width: 1200px;
+  padding: 24px;
+  /* ❌ ANTES: background: #f8f9fa; (gris claro) */
+  /* ✅ AHORA: usar fondo secundario */
+  background: var(--bg-secondary);
+  
+  border-radius: 12px;
+}
+
+.filters select,
+.filters input {
+  width: auto;
+  min-width: 200px;
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  /* ❌ ANTES: border: 1px solid #ddd;
+     background-color: #fff;
+     (colores claro) */
+  /* ✅ AHORA: usar colores globales */
+  border: 1px solid var(--border);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  
+  outline: none;
+  transition: var(--transition);
+}
+
+.filters select:hover,
+.filters input:hover {
+  /* ❌ ANTES: border-color: #999; */
+  /* ✅ AHORA: usar borde light */
+  border-color: var(--border-light);
+}
+
+.filters select:focus,
+.filters input:focus {
+  /* ❌ ANTES: border-color: #09f;
+     box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1); */
+  /* ✅ AHORA: usar acento */
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-lighter);
+}
+
+.filtros {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 24px auto;
+  max-width: 1200px;
+  padding: 16px;
+}
+
+.filtros select {
+  width: auto;
+  min-width: 180px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  /* ❌ ANTES: border: 1px solid #444;
+     background-color: #222;
+     color: #eee; */
+  /* ✅ AHORA: usar colores globales */
+  border: 1px solid var(--border);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  
+  font-size: 1rem;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.filtros select:hover {
+  /* ❌ ANTES: background-color: #333;
+     border-color: #666; */
+  /* ✅ AHORA: usar colores globales */
+  background-color: var(--bg-hover);
+  border-color: var(--border-light);
+}
+
+.filtros select:focus {
+  outline: none;
+  /* ❌ ANTES: border-color: #09f;
+     background-color: #111;
+     box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2); */
+  /* ✅ AHORA: usar acento */
+  border-color: var(--accent);
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--accent-lighter);
+}
+
+.filtros option {
+  /* ❌ ANTES: background: #222;
+     color: #eee; */
+  /* ✅ AHORA: usar colores globales */
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 8px;
+}
+
+/* ========== CATÁLOGO ========== */
+.catalogo {
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.catalogo > div {
+  margin-bottom: 40px;
+}
+
+.catalogo h2 {
+  /* ❌ ANTES: color: #222; (gris oscuro) */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
+  font-size: 1.75rem;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  /* ❌ ANTES: border-left: 5px solid #09f; */
+  /* ✅ AHORA: usar acento */
+  border-left: 5px solid var(--accent);
+  
+  transition: var(--transition);
+}
+
+.catalogo h2:hover {
+  border-left-width: 7px;
+  padding-left: 18px;
+}
+
+/* ========== CONTENEDOR DE CARDS ========== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  padding: 0;
+}
+
+/* ========== PRODUCT CARD ========== */
+.product-card {
+  /* ❌ ANTES: background-color: #fff; (blanco) */
+  /* ✅ AHORA: usar fondo terciario */
+  background-color: var(--bg-tertiary);
+  
+  border-radius: 12px;
+  /* ❌ ANTES: box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
+  /* ✅ AHORA: usar sombra pequeña */
+  box-shadow: 0 4px 12px var(--shadow-sm);
+  
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  transition: var(--transition);
+  animation: fadeIn 0.5s ease;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* ❌ ANTES: background: linear-gradient(135deg, rgba(0, 153, 255, 0.1) 0%, transparent 100%); */
+  /* ✅ AHORA: usar acento light */
+  background: linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  /* ❌ ANTES: box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); */
+  /* ✅ AHORA: usar sombra */
+  box-shadow: 0 12px 24px var(--shadow);
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-card:active {
+  transform: translateY(-4px);
+}
+
+/* ========== IMAGEN DEL PRODUCTO ========== */
+.product-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* ========== DETALLES DEL PRODUCTO ========== */
+.product-details {
+  padding: 20px;
+  text-align: left;
+}
+
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  /* ❌ ANTES: color: #222; (gris oscuro) */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-info {
+  font-size: 1rem;
+  /* ❌ ANTES: color: #666; (gris) */
+  /* ✅ AHORA: usar texto secundario */
+  color: var(--text-secondary);
+  
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.product-info strong {
+  /* ❌ ANTES: color: #333; */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
+  font-weight: 600;
+}
+
+.product-price {
+  margin-top: 14px;
+  padding: 10px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  /* ❌ ANTES: color: #09f; */
+  /* ✅ AHORA: usar acento */
+  color: var(--accent);
+  
+  /* ❌ ANTES: border-top: 1px solid #eee;
+     border-bottom: 1px solid #eee; */
+  /* ✅ AHORA: usar borde */
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ========== BOTÓN DE COMPRA ========== */
+.container-button {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.buy-button {
+  flex: 1; 
+  padding: 10px 18px;
+  /* ❌ ANTES: background-color: rgb(93, 106, 114); (gris) */
+  /* ✅ AHORA: usar acento */
+  background-color: var(--accent);
+  
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.buy-button:hover {
+  /* ❌ ANTES: background-color: rgb(117, 183, 215);
+    color: #111;
+     box-shadow: 0 4px 12px rgba(0, 153, 255, 0.3); */
+  /* ✅ AHORA: usar acento hover */
+  background-color: var(--accent-hover);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-light);
+}
+
+.buy-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px var(--accent-light);
+}
+
+.buy-button:focus-visible {
+  /* ❌ ANTES: outline: 3px solid #09f; */
+  /* ✅ AHORA: usar acento */
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Estilos para cuando está en el carrito */
+.buy-button[style*="rgba(201, 20, 20"] {
+  background-color: var(--danger) !important;
+}
+
+.buy-button[style*="rgba(201, 20, 20"]:hover {
+  background-color: var(--accent-hover) !important;
+  box-shadow: 0 4px 12px var(--danger-light) !important;
+}
+
+/* ========== ADMIN CARD ========== */
+.product-card.admin-card {
+    /* ❌ ANTES: border: 2px solid #09f; */
+    /* ✅ AHORA: usar acento */
+    border: 2px solid var(--accent);
+}
+
+.product-card.admin-card .buy-button {
+    /* ❌ ANTES: background: linear-gradient(135deg, #09f 0%, #0af 100%); */
+    /* ✅ AHORA: usar gradiente de acento */
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
 }
 
 /* ========== PANTALLAS MUY GRANDES (> 1440px) ========== */
@@ -276,7 +1182,6 @@
     max-width: 300px;
   }
 }
-
 
 /* ========== DESKTOP LARGE (1025px - 1440px) ========== */
 @media (max-width: 1440px) {
@@ -451,83 +1356,6 @@
   }
 }
 
-/* ========== ACCESIBILIDAD ========== */
-@media (prefers-reduced-motion: reduce) {
-  .product-card,
-  .product-image,
-  .buy-button,
-  .catalogo h2,
-  .filters select,
-  .filters input,
-  .filtros select {
-    transition: none;
-  }
-
-  @keyframes fadeIn {
-    from, to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .product-card:hover {
-    transform: none;
-  }
-
-  .product-card:hover .product-image {
-    transform: none;
-  }
-
-  .product-card::before {
-    display: none;
-  }
-}
-
-/* ========== MODO CLARO (si el sistema lo prefiere) ========== */
-@media (prefers-color-scheme: light) {
-  .filtros select {
-    background-color: #f8f9fa;
-    color: #222;
-    border-color: #ddd;
-  }
-
-  .filtros select:hover {
-    background-color: #e9ecef;
-    border-color: #999;
-  }
-
-  .filtros select:focus {
-    background-color: #fff;
-  }
-
-  .filtros option {
-    background: #fff;
-    color: #222;
-  }
-}
-
-/* ========== FOCUS VISIBLE (mejora de accesibilidad) ========== */
-.filters select:focus-visible,
-.filters input:focus-visible,
-.filtros select:focus-visible {
-  outline: 3px solid #09f;
-  outline-offset: 2px;
-}
-
-/* ========== ANIMACIÓN DE CARGA ========== */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.product-card.loading {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
 /* ========== SEARCH HEADER ========== */
 .search-header {
   display: flex;
@@ -536,9 +1364,15 @@
   margin: 0 auto 24px;
   padding: 16px 24px;
   max-width: 900px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  /* ❌ ANTES: background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
+  /* ✅ AHORA: usar fondos globales */
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  
   border-radius: 10px;
-  border-left: 4px solid #09f;
+  /* ❌ ANTES: border-left: 4px solid #09f; */
+  /* ✅ AHORA: usar acento */
+  border-left: 4px solid var(--accent);
+  
   flex-wrap: wrap;
   gap: 16px;
   animation: slideInDown 0.4s ease;
@@ -559,7 +1393,10 @@
   margin: 0;
   padding: 0;
   border: none;
-  color: #222;
+  /* ❌ ANTES: color: #222; (gris oscuro) */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -572,21 +1409,28 @@
 /* ========== CLEAR SEARCH BUTTON ========== */
 .clear-search-btn {
   padding: 10px 20px;
-  background: #e94560;
+  /* ❌ ANTES: background: #e94560; (rojo diferente) */
+  /* ✅ AHORA: usar acento */
+  background: var(--accent);
+  
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.2);
+  transition: var(--transition);
+  /* ❌ ANTES: box-shadow: 0 2px 8px rgba(233, 69, 96, 0.2); */
+  /* ✅ AHORA: usar acento light */
+  box-shadow: 0 2px 8px var(--accent-light);
 }
 
 .clear-search-btn:hover {
-  background: #d63850;
+  /* ❌ ANTES: background: #d63850; */
+  /* ✅ AHORA: usar acento hover */
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(233, 69, 96, 0.35);
+  box-shadow: 0 4px 14px var(--accent-light);
 }
 
 .clear-search-btn:active {
@@ -594,7 +1438,9 @@
 }
 
 .clear-search-btn:focus-visible {
-  outline: 3px solid #e94560;
+  /* ❌ ANTES: outline: 3px solid #e94560; */
+  /* ✅ AHORA: usar acento */
+  outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -602,7 +1448,10 @@
 .no-results {
   text-align: center;
   padding: 60px 20px;
-  background: #f8f9fa;
+  /* ❌ ANTES: background: #f8f9fa; (gris claro) */
+  /* ✅ AHORA: usar fondo secundario */
+  background: var(--bg-secondary);
+  
   border-radius: 12px;
   margin: 40px auto;
   max-width: 500px;
@@ -611,7 +1460,10 @@
 
 .no-results h2 {
   font-size: 1.6rem;
-  color: #6c757d;
+  /* ❌ ANTES: color: #6c757d; (gris) */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
   margin: 0 0 12px 0;
   padding: 0;
   border: none;
@@ -624,7 +1476,10 @@
 }
 
 .no-results p {
-  color: #6c757d;
+  /* ❌ ANTES: color: #6c757d; (gris) */
+  /* ✅ AHORA: usar texto secundario */
+  color: var(--text-secondary);
+  
   font-size: 1rem;
   margin-bottom: 20px;
   line-height: 1.5;
@@ -632,11 +1487,15 @@
 
 .no-results .clear-search-btn {
   margin-top: 12px;
-  background: #09f;
+  /* ❌ ANTES: background: #09f; */
+  /* ✅ AHORA: usar acento */
+  background: var(--accent);
 }
 
 .no-results .clear-search-btn:hover {
-  background: #0088dd;
+  /* ❌ ANTES: background: #0088dd; */
+  /* ✅ AHORA: usar acento hover */
+  background: var(--accent-hover);
 }
 
 /* ========== CATEGORIA SECTION ========== */
@@ -646,14 +1505,23 @@
 
 .categoria-section h2 {
   font-size: 1.6rem;
-  color: #222;
+  /* ❌ ANTES: color: #222; (gris oscuro) */
+  /* ✅ AHORA: usar texto primario */
+  color: var(--text-primary);
+  
   margin-bottom: 20px;
   padding: 10px 16px;
-  border-left: 4px solid #09f;
-  background: linear-gradient(90deg, rgba(0, 153, 255, 0.08) 0%, transparent 100%);
+  /* ❌ ANTES: border-left: 4px solid #09f; */
+  /* ✅ AHORA: usar acento */
+  border-left: 4px solid var(--accent);
+  
+  /* ❌ ANTES: background: linear-gradient(90deg, rgba(0, 153, 255, 0.08) 0%, transparent 100%); */
+  /* ✅ AHORA: usar acento light */
+  background: linear-gradient(90deg, var(--accent-light) 0%, transparent 100%);
+  
   border-radius: 0 8px 8px 0;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .categoria-section h2:hover {
@@ -722,10 +1590,24 @@
 
 /* ========== ACCESIBILIDAD ========== */
 @media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-image,
+  .buy-button,
+  .catalogo h2,
+  .filters select,
+  .filters input,
+  .filtros select,
   .search-header,
   .clear-search-btn,
   .categoria-section h2 {
     transition: none;
+  }
+
+  @keyframes fadeIn {
+    from, to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes slideInDown {
@@ -734,16 +1616,42 @@
       transform: translateY(0);
     }
   }
-  
+
+  .product-card:hover {
+    transform: none;
+  }
+
+  .product-card:hover .product-image {
+    transform: none;
+  }
+
+  .product-card::before {
+    display: none;
+  }
+
   .clear-search-btn:hover {
     transform: none;
   }
 }
 
-.product-card.admin-card {
-    border: 2px solid #09f;
+/* ========== FOCUS VISIBLE (mejora de accesibilidad) ========== */
+.filters select:focus-visible,
+.filters input:focus-visible,
+.filtros select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.product-card.admin-card .buy-button {
-    background: linear-gradient(135deg, #09f 0%, #0af 100%);
+/* ========== ANIMACIÓN DE CARGA ========== */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.product-card.loading {
+  animation: pulse 1.5s ease-in-out infinite;
 }

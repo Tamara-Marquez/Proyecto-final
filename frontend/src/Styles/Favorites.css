@@ -1,4 +1,4 @@
-
+/* 
 .favorite-container {
   max-width: 1000px;
   margin: 40px auto;
@@ -27,17 +27,17 @@
 
 .favorite-container > button:hover {
   background-color: #ff3b3b;
-}
+} */
 
 /* Contenedor de los items */
-.favorite-second {
+/* .favorite-second {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-}
+} */
 
 /* Tarjeta de cada producto favorito */
-.favorito-item {
+/* .favorito-item {
   background: #f9f9f9;
   border-radius: 12px;
   padding: 16px;
@@ -72,10 +72,10 @@
   font-size: 1rem;
   color: #555;
   margin-bottom: 12px;
-}
+} */
 
 /* Botones dentro de cada tarjeta */
-.favorito-item button {
+/* .favorito-item button {
   padding: 8px 12px;
   background-color: #595656;
   color: white;
@@ -88,4 +88,184 @@
 
 .favorito-item button:hover {
   background-color: #ff3b3b;
+} */
+
+/* ==================== VARIABLES GLOBALES ==================== */
+:root {
+  /* ========== FONDOS - MODO OSCURO ========== */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #252d3d;
+  --bg-hover: #2d3748;
+  
+  /* ========== TEXTOS - MODO OSCURO ========== */
+  --text-primary: #f0f2f5;
+  --text-secondary: #b0b8c1;
+  --text-tertiary: #7a8a99;
+  
+  /* ========== COLORES DE ACENTO ========== */
+  --accent: #0099ff;
+  --accent-hover: #0088dd;
+  --accent-light: rgba(0, 153, 255, 0.1);
+  --accent-lighter: rgba(0, 153, 255, 0.05);
+  
+  /* ========== COLORES DE ESTADO ========== */
+  --success: #10b981;
+  --success-light: rgba(16, 185, 129, 0.1);
+  --danger: #ef4444;
+  --danger-light: rgba(239, 68, 68, 0.1);
+  --warning: #f59e0b;
+  --warning-light: rgba(245, 158, 11, 0.1);
+  
+  /* ========== BORDES Y SOMBRAS ========== */
+  --border: #2d3748;
+  --border-light: #3a4556;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  
+  /* ========== TRANSICIONES ========== */
+  --transition: all 0.3s ease;
+  --transition-fast: all 0.2s ease;
+}
+
+/* ========== MODO CLARO ========== */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* FONDOS - MODO CLARO */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f0f4f8;
+    --bg-hover: #e9ecef;
+    
+    /* TEXTOS - MODO CLARO */
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-tertiary: #718096;
+    
+    /* ACENTO (se mantiene igual) */
+    --accent: #0099ff;
+    --accent-hover: #0077cc;
+    --accent-light: rgba(0, 153, 255, 0.08);
+    --accent-lighter: rgba(0, 153, 255, 0.03);
+    
+    /* ESTADO (colores más oscuros en modo claro) */
+    --success: #059669;
+    --success-light: rgba(5, 150, 105, 0.1);
+    --danger: #dc2626;
+    --danger-light: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --warning-light: rgba(217, 119, 6, 0.1);
+    
+    /* BORDES Y SOMBRAS */
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-sm: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ==================== FAVORITOS.CSS ==================== */
+
+.favorite-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.favorite-container h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.favorite-container > button {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px 20px;
+  background-color: var(--accent);
+  
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.favorite-container > button:hover {
+  background-color: var(--danger);
+  transform: translateY(-2px);
+}
+
+.favorite-container > button:active {
+  transform: translateY(0);
+}
+
+/* Contenedor de los items */
+.favorite-second {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjeta de cada producto favorito */
+.favorito-item {
+  background: var(--bg-tertiary);
+  
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px var(--shadow-sm);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.favorito-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+.favorito-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.favorito-item h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.favorito-item p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Botones dentro de cada tarjeta */
+.favorito-item button {
+  padding: 8px 12px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.favorito-item button:hover {
+  background-color: var(--danger);
+  transform: translateY(-2px);
+}
+
+.favorito-item button:active {
+  transform: translateY(0);
 }

@@ -1,4 +1,4 @@
-.edit-form {
+/* .edit-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -32,4 +32,143 @@
 .btn.danger {
   background-color: #d9534f;
   color: white;
+} */
+
+/* ==================== VARIABLES GLOBALES ==================== */
+:root {
+  /* ========== FONDOS - MODO OSCURO ========== */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #252d3d;
+  --bg-hover: #2d3748;
+  
+  /* ========== TEXTOS - MODO OSCURO ========== */
+  --text-primary: #f0f2f5;
+  --text-secondary: #b0b8c1;
+  --text-tertiary: #7a8a99;
+  
+  /* ========== COLORES DE ACENTO ========== */
+  --accent: #0099ff;
+  --accent-hover: #0088dd;
+  --accent-light: rgba(0, 153, 255, 0.1);
+  --accent-lighter: rgba(0, 153, 255, 0.05);
+  
+  /* ========== COLORES DE ESTADO ========== */
+  --success: #10b981;
+  --success-light: rgba(16, 185, 129, 0.1);
+  --danger: #ef4444;
+  --danger-light: rgba(239, 68, 68, 0.1);
+  --warning: #f59e0b;
+  --warning-light: rgba(245, 158, 11, 0.1);
+  
+  /* ========== BORDES Y SOMBRAS ========== */
+  --border: #2d3748;
+  --border-light: #3a4556;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  
+  /* ========== TRANSICIONES ========== */
+  --transition: all 0.3s ease;
+  --transition-fast: all 0.2s ease;
+}
+
+/* ========== MODO CLARO ========== */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* FONDOS - MODO CLARO */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f0f4f8;
+    --bg-hover: #e9ecef;
+    
+    /* TEXTOS - MODO CLARO */
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-tertiary: #718096;
+    
+    /* ACENTO (se mantiene igual) */
+    --accent: #0099ff;
+    --accent-hover: #0077cc;
+    --accent-light: rgba(0, 153, 255, 0.08);
+    --accent-lighter: rgba(0, 153, 255, 0.03);
+    
+    /* ESTADO (colores más oscuros en modo claro) */
+    --success: #059669;
+    --success-light: rgba(5, 150, 105, 0.1);
+    --danger: #dc2626;
+    --danger-light: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --warning-light: rgba(217, 119, 6, 0.1);
+    
+    /* BORDES Y SOMBRAS */
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-sm: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ==================== EDIT-FORM.CSS ==================== */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-hover);
+  transition: var(--transition-fast);
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-lighter);
+}
+
+.edit-form h3 {
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn.danger {
+  background-color: var(--danger);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn.danger:hover {
+
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--danger-light);
+}
+
+.btn.danger:active {
+  transform: translateY(0);
 }
